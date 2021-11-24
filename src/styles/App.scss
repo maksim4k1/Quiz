@@ -1,0 +1,22 @@
+/* Стили контейнеров */
+.container, .large_container, .small_container, .form_container{
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
+  box-sizing: initial;
+}
+.container{
+  max-width: 1056px;
+}
+.large_container{
+  max-width: 1300px;
+}
+.small_container{
+  max-width: 740px;
+}
+.form_container{
+  max-width: 500px;
+  &{
+    color: var(--color-red);
+  }
+}
