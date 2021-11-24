@@ -1,0 +1,21 @@
+.container{
+  width: 100%;
+  max-width: 1056px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+.large_container{
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.App{
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column;
+  &>footer{
+    margin: auto 0 0;
+  }
+}
