@@ -3,7 +3,6 @@
   width: 100%;
   margin: 0 auto;
   padding: 0 15px;
-  box-sizing: initial;
 }
 .container{
   max-width: 1056px;
@@ -19,4 +18,10 @@
   &{
     color: var(--color-red);
   }
+}
+
+.App{
+  min-height: 100vh;
+  display: flex;
+  flex-flow: column;
 }
