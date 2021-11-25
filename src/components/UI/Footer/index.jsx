@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { gap } from "../../../styles/mixins";
@@ -26,14 +27,22 @@ const Navigation = styled.nav`
   ${gap("50px")}
 `;
 
-function Footer () {
+function Footer ({isAuth}) {
   return(
     <FooterElement>
       <Container className="large_container">
         <Logo to="/">Quiz</Logo>
         <Navigation>
           <AppLink to="/" color="var(--color-white)">Главная</AppLink>
-          <AppLink to="/" color="var(--color-white)">Профиль</AppLink>
+          {
+            isAuth
+            ? <AppLink to="/profile" color="var(--color-white)">Профиль</AppLink>
+            : <>
+              <AppLink to="/signin" color="var(--color-white)">Авторизация</AppLink>
+              <AppLink to="/signup" color="var(--color-white)">Регистрация</AppLink>
+            </>
+          }
+          
           <AppLink to="/" color="var(--color-white)">Категории</AppLink>
           <AppLink to="/" color="var(--color-white)">Рейтинг игроков</AppLink>
         </Navigation>
@@ -42,4 +51,8 @@ function Footer () {
   );
 }
 
-export default Footer;
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth
+});
+
+export default connect(mapStateToProps)(Footer);

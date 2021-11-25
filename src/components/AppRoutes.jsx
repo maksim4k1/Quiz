@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { Navigate, Route, Routes } from "react-router";
 import { privateRoutes, publicRoutes, generalRoutes } from "../utils/routes";
 
-function AppRoutes () {
-  const [routes] = useState([...privateRoutes, ...publicRoutes, ...generalRoutes]);
+function AppRoutes ({isAuth}) {
+  const [routes, setRoutes] = useState([...privateRoutes, ...publicRoutes, ...generalRoutes]);
+
+  useEffect(() => {
+    if(isAuth){
+      setRoutes([...privateRoutes, ...generalRoutes]);
+    } else{
+      setRoutes([...publicRoutes, ...generalRoutes]);
+    }
+  }, [isAuth]);
 
   return(
     <Routes>
@@ -17,4 +26,8 @@ function AppRoutes () {
   );
 }
 
-export default AppRoutes;
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth
+});
+
+export default connect(mapStateToProps)(AppRoutes);

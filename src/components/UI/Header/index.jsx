@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { gap } from "../../../styles/mixins";
@@ -26,22 +27,36 @@ const Navigation = styled.nav`
   ${gap("30px")}
 `;
 
-function Header () {
+function Header ({isAuth}) {
   return(
     <HeaderElement>
       <Container className="large_container">
         <Logo to="/">Quiz</Logo>
         <Navigation>
-          <NavLink to="/signin">
-            <LightButton width="150px">Авторизация</LightButton>
-          </NavLink>
-          <NavLink to="/signup">
-            <Button width="150px">Регистрация</Button>
-          </NavLink>
+          {
+            isAuth
+            ? <>
+              <NavLink to="/profile">
+                <LightButton width="150px">Профиль</LightButton>
+              </NavLink>
+            </>
+            : <>
+              <NavLink to="/signin">
+                <LightButton width="150px">Авторизация</LightButton>
+              </NavLink>
+              <NavLink to="/signup">
+                <Button width="150px">Регистрация</Button>
+              </NavLink>
+            </>
+          }
         </Navigation>
       </Container>
     </HeaderElement>
   );
 }
 
-export default Header;
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth
+});
+
+export default connect(mapStateToProps)(Header);
