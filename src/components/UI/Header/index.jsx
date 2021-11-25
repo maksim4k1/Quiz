@@ -1,6 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { gap } from "../../../styles/mixins";
+import Button from "../Buttons/Button";
+import LightButton from "../Buttons/LightButton";
 
 const HeaderElement = styled.header`
   width: 100%;
@@ -18,12 +21,24 @@ const Logo = styled(NavLink)`
   font-size: 32px;
   font-weight: 600;
 `;
+const Navigation = styled.nav`
+  display: flex;
+  ${gap("30px")}
+`;
 
 function Header () {
   return(
     <HeaderElement>
       <Container className="large_container">
         <Logo to="/">Quiz</Logo>
+        <Navigation>
+          <NavLink to="/signin">
+            <LightButton width="150px">Авторизация</LightButton>
+          </NavLink>
+          <NavLink to="/signup">
+            <Button width="150px">Регистрация</Button>
+          </NavLink>
+        </Navigation>
       </Container>
     </HeaderElement>
   );
