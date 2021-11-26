@@ -8,7 +8,7 @@ import Form from "../components/UI/Form";
 import Input from "../components/UI/Input";
 import { signInAction } from "../redux/actions/auth/signInActions";
 
-const Main = styled.div`
+const Content = styled.main`
   margin: 150px 0;
 `;
 const RedirectLink = styled.div`
@@ -43,7 +43,7 @@ function SignIn ({info, signIn}) {
   }
 
   return(
-    <Main>
+    <Content>
       <div className="form_container">
         <Form title="Авторизация" onSubmit={signInHandler}>
 
@@ -71,7 +71,7 @@ function SignIn ({info, signIn}) {
           <RedirectLink>Вы не зарегестрированы? <AppLink to="/signup">Регистрация</AppLink></RedirectLink>
         </Form>
       </div>
-    </Main>
+    </Content>
   );
 }
 
