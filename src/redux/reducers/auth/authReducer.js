@@ -16,6 +16,7 @@ const authReducer = (state=initialState, {type, payload}) => {
         ...state,
         signIn: stateCreator(SUCCESS),
         isAuth: true,
+        profile: payload,
       }
     } case SIGN_IN_LOADING: {
       return {
@@ -34,6 +35,7 @@ const authReducer = (state=initialState, {type, payload}) => {
         ...state,
         signUp: stateCreator(SUCCESS),
         isAuth: true,
+        profile: payload,
       }
     } case SIGN_UP_LOADING: {
       return {

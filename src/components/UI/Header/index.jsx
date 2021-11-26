@@ -11,6 +11,7 @@ const HeaderElement = styled.header`
   width: 100%;
   height: 80px;
   background: var(--color-white);
+  box-shadow: 0 0 8px var(--color-gray);
 `;
 const Container = styled.div`
   height: 100%;

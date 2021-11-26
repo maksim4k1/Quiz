@@ -11,7 +11,14 @@ export function signUpAction(formData, redirect){
           dispatch({type: SIGN_UP_FAILING, payload: "Пароли не совпадают"});
         } else{
           redirect();
-          dispatch({type: SIGN_UP_SUCCESS});
+          dispatch({type: SIGN_UP_SUCCESS, payload: {
+            id: 0,
+            username: formData.username,
+            name: formData.name,
+            description: "",
+            score: 0,
+            image: "",
+          }});
         }
       }, 500);
     } catch{

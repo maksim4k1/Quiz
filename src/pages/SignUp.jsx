@@ -9,7 +9,7 @@ import Input from "../components/UI/Input";
 import { signUpAction } from "../redux/actions/auth/signUpActions";
 
 const Content = styled.main`
-  margin: 150px 0;
+  margin: 100px 0 150px;
 `;
 const RedirectLink = styled.div`
   color: var(--color-gray);

@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Content = styled.main`
-  margin: 150px 0;
+  margin: 100px 0 150px;
 `;
 
 function Error404 () {

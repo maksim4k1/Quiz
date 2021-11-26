@@ -7,7 +7,14 @@ export function signInAction(formData, redirect){
       setTimeout(() => {
         if(formData.username && formData.password){
           redirect();
-          dispatch({type: SIGN_IN_SUCCESS});
+          dispatch({type: SIGN_IN_SUCCESS, payload: {
+            id: 0,
+            username: "Maks",
+            name: "Максим",
+            description: "Front-End разработчик",
+            score: 18,
+            image: "https://www.ladymakeup.com/js/lightbox/img/demopage/image-3.jpg",
+          }});
         } else{
           dispatch({type: SIGN_IN_FAILING, payload: "Заполните все поля"});
         }
