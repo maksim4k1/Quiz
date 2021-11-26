@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useNavigate } from "react-router";
 import styled from "styled-components";
 import AppLink from "../components/UI/AppLink";
 import Button from "../components/UI/Buttons/Button";
 import Form from "../components/UI/Form";
 import Input from "../components/UI/Input";
-import { signUpSuccessAction } from "../redux/actions/auth/signUpActions";
+import { signInAction } from "../redux/actions/auth/signInActions";
 
 const Main = styled.div`
   margin: 150px 0;
@@ -17,9 +18,13 @@ const RedirectLink = styled.div`
 `;
 
 function SignIn ({signIn}) {
+  const navigate = useNavigate();
+
   function signInHandler(event){
     event.preventDefault();
-    signIn()
+
+    signIn();
+    navigate("/");
   }
 
   return(
@@ -37,7 +42,7 @@ function SignIn ({signIn}) {
 }
 
 const mapDispatchToProps = {
-  signIn: signUpSuccessAction
+  signIn: signInAction
 };
 
 export default connect(null, mapDispatchToProps)(SignIn);

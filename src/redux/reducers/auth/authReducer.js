@@ -1,5 +1,5 @@
 import stateCreator from "../../../utils/stateCreator";
-import { FAILING, LOADING, SIGN_IN_FAILING, SIGN_IN_LOADING, SIGN_IN_SUCCESS, SIGN_UP_FAILING, SIGN_UP_LOADING, SIGN_UP_SUCCESS, SUCCESS } from "../../types";
+import { FAILING, LOADING, LOG_OUT, SIGN_IN_FAILING, SIGN_IN_LOADING, SIGN_IN_SUCCESS, SIGN_UP_FAILING, SIGN_UP_LOADING, SIGN_UP_SUCCESS, SUCCESS } from "../../types";
 
 const initialState = {
   isAuth: false,
@@ -8,7 +8,7 @@ const initialState = {
   signUp: stateCreator()
 }
 
-const authReducer = (state=initialState, {type}) => {
+const authReducer = (state=initialState, {type, payload}) => {
   switch (type) {
     // Sign In
     case SIGN_IN_SUCCESS: {
@@ -25,7 +25,7 @@ const authReducer = (state=initialState, {type}) => {
     } case SIGN_IN_FAILING: {
       return {
         ...state,
-        signIn: stateCreator(FAILING),
+        signIn: stateCreator(FAILING, payload),
       }
     }
     // Sign Up
@@ -43,8 +43,12 @@ const authReducer = (state=initialState, {type}) => {
     } case SIGN_UP_FAILING: {
       return {
         ...state,
-        signUp: stateCreator(FAILING),
+        signUp: stateCreator(FAILING, payload),
       }
+    }
+    // Log Out
+    case LOG_OUT: {
+      return initialState;
     }
     default: {
       return state;

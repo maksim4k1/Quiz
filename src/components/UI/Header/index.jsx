@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { logOutAction } from "../../../redux/actions/auth/logOutAction";
 import { gap } from "../../../styles/mixins";
 import Button from "../Buttons/Button";
 import LightButton from "../Buttons/LightButton";
@@ -27,7 +28,18 @@ const Navigation = styled.nav`
   ${gap("30px")}
 `;
 
-function Header ({isAuth}) {
+function Header ({isAuth, logOut}) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  function logOutHandler(){
+    const isLogOut = window.confirm("Вы уверены что хотите выйти из аккаунта?");
+    if(isLogOut){
+      logOut();
+      navigate("/");
+    }
+  }
+
   return(
     <HeaderElement>
       <Container className="large_container">
@@ -35,7 +47,9 @@ function Header ({isAuth}) {
         <Navigation>
           {
             isAuth
-            ? <>
+            ? location.pathname === "/profile"
+            ? <LightButton width="150px" onClick={logOutHandler}>Выйти</LightButton>
+            : <>
               <NavLink to="/profile">
                 <LightButton width="150px">Профиль</LightButton>
               </NavLink>
@@ -58,5 +72,8 @@ function Header ({isAuth}) {
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth
 });
+const mapDispatchToProps = {
+  logOut: logOutAction
+}
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

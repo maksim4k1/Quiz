@@ -37,10 +37,7 @@ function Footer ({isAuth}) {
           {
             isAuth
             ? <AppLink to="/profile" color="var(--color-white)">Профиль</AppLink>
-            : <>
-              <AppLink to="/signin" color="var(--color-white)">Авторизация</AppLink>
-              <AppLink to="/signup" color="var(--color-white)">Регистрация</AppLink>
-            </>
+            : <AppLink to="/signin" color="var(--color-white)">Авторизация</AppLink>
           }
           
           <AppLink to="/" color="var(--color-white)">Категории</AppLink>

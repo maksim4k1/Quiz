@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Navigate, Route, Routes } from "react-router";
-import { privateRoutes, publicRoutes, generalRoutes } from "../utils/routes";
+import generalRoutes from "../routes/generalRoutes";
+import privateRoutes from "../routes/privateRoutes";
+import publicRoutes from "../routes/publicRoutes";
 
 function AppRoutes ({isAuth}) {
   const [routes, setRoutes] = useState([...privateRoutes, ...publicRoutes, ...generalRoutes]);
