@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
@@ -16,24 +16,56 @@ const RedirectLink = styled.div`
   font-size: 14px;
   font-weight: 600;
 `;
+const Error = styled.div`
+  color: var(--color-red);
+  font-size: 12px;
+  font-weight: 600;
+`;
 
-function SignIn ({signIn}) {
+function SignIn ({info, signIn}) {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({});
+
+  function onChangeHandler(event){
+    setFormData((data) => ({
+      ...data,
+      [event.target.name]: event.target.value
+    }));
+    info.error = ""
+  }
 
   function signInHandler(event){
     event.preventDefault();
 
-    signIn();
-    navigate("/");
+    signIn(formData, navigate);
   }
 
   return(
     <Main>
       <div className="form_container">
         <Form title="Авторизация" onSubmit={signInHandler}>
-          <Input type="text" placeholder="Имя пользователя"/>
-          <Input type="password" placeholder="Пароль"/>
-          <Button type="submit">Авторизация</Button>
+
+          <Input
+            name="username"
+            value={formData.username || ""}
+            type="text"
+            placeholder="Имя пользователя"
+            onChange={onChangeHandler}
+          />
+          <Input
+            name="password"
+            value={formData.password || ""}
+            type="password"
+            placeholder="Пароль"
+            onChange={onChangeHandler}
+          />
+
+          <Button type="submit" disabled={info.loading}>{info.loading ? "Подождите..." : "Авторизация"}</Button>
+          {
+            info.error && info.failing
+            ? <Error>{info.error}</Error>
+            : null
+          }
           <RedirectLink>Вы не зарегестрированы? <AppLink to="/signup">Регистрация</AppLink></RedirectLink>
         </Form>
       </div>
@@ -41,8 +73,11 @@ function SignIn ({signIn}) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  info: state.auth.signIn
+});
 const mapDispatchToProps = {
   signIn: signInAction
 };
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

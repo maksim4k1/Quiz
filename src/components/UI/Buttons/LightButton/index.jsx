@@ -19,6 +19,11 @@ const ButtonElement = styled.button`
     background: var(--color-darkblue);
     color: var(--color-white);
   }
+  &:disabled{
+    color: var(--color-gray);
+    border-color: var(--color-darkblue);
+    background: var(--color-darkblue);
+  }
 `;
 
 function LightButton (props) {
