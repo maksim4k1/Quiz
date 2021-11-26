@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
@@ -16,26 +16,72 @@ const RedirectLink = styled.div`
   font-size: 14px;
   font-weight: 600;
 `;
+const Error = styled.div`
+  color: var(--color-red);
+  font-size: 12px;
+  font-weight: 600;
+`;
 
-function SignUp ({signUp}) {
+function SignUp ({info, signUp}) {
   const navigate = useNavigate();
+  const [formData, setFormData] = useState({});
+
+  function onChangeHandler(event){
+    setFormData((data) => ({
+      ...data,
+      [event.target.name]: event.target.value
+    }));
+    info.error = ""
+  }
   
   function signUpHandler(event){
     event.preventDefault();
 
-    signUp();
-    navigate("/");
+    signUp(formData, () => {
+      navigate("/");
+    });
   }
 
   return(
     <Main>
       <div className="form_container">
         <Form title="Регистрация" onSubmit={signUpHandler}>
-          <Input type="text" placeholder="Ваше имя"/>
-          <Input type="text" placeholder="Имя пользователя"/>
-          <Input type="password" placeholder="Пароль"/>
-          <Input type="password" placeholder="Потвердите пароль"/>
-          <Button type="submit">Регистрация</Button>
+
+          <Input
+            name="name"
+            value={formData.name || ""}
+            type="text"
+            placeholder="Ваше имя"
+            onChange={onChangeHandler}
+          />
+          <Input
+            name="username"
+            value={formData.username || ""}
+            type="text"
+            placeholder="Имя пользователя"
+            onChange={onChangeHandler}
+          />
+          <Input
+            name="password"
+            value={formData.password || ""}
+            type="password"
+            placeholder="Пароль"
+            onChange={onChangeHandler}
+          />
+          <Input
+            name="confirm_password"
+            value={formData.confirm_password || ""}
+            type="password"
+            placeholder="Потвердите пароль"
+            onChange={onChangeHandler}
+          />
+
+          <Button type="submit" disabled={info.loading}>{info.loading ? "Подождите..." : "Регистрация"}</Button>
+          {
+            info.error && info.failing
+            ? <Error>{info.error}</Error>
+            : null
+          }
           <RedirectLink>Вы уже зарегистрированы? <AppLink to="/signin">Авторизация</AppLink></RedirectLink>
         </Form>
       </div>
@@ -43,8 +89,11 @@ function SignUp ({signUp}) {
   );
 }
 
+const mapStateToProps = (state) => ({
+  info: state.auth.signUp
+});
 const mapDispatchToProps = {
   signUp: signUpAction
 };
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

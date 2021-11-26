@@ -37,7 +37,9 @@ function SignIn ({info, signIn}) {
   function signInHandler(event){
     event.preventDefault();
 
-    signIn(formData, navigate);
+    signIn(formData, () => {
+      navigate("/");
+    });
   }
 
   return(
