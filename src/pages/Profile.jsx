@@ -5,6 +5,7 @@ import styled from "styled-components";
 import Button from "../components/UI/Buttons/Button";
 import LightButton from "../components/UI/Buttons/LightButton";
 import { gap } from "../styles/mixins";
+import camera_icon from "../assets/icons/camera-icon.svg";
 
 const Content = styled.main`
   margin: 100px 0 150px;
@@ -17,6 +18,18 @@ const Container = styled.div`
 const User = styled.div`
   display: flex;
   ${gap("40px")}
+`;
+const ImageContainer = styled.div`
+  width: 100%;
+  max-width: 300px;
+  height: 300px;
+  background-color: var(--color-darkblue);
+  background-image: url(${camera_icon});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100px;
+  border-radius: 50%;
+  overflow: hidden;
 `;
 const Image = styled.img`
   width: 100%;
@@ -64,11 +77,13 @@ function Profile ({profile}) {
         {
           profile
           ? <User>
-            {
-              profile.image
-              ? <Image src={profile.image}/>
-              : <Image/>
-            }
+            <ImageContainer>
+              {
+                profile.image
+                ? <Image src={profile.image} alt="Profile image"/>
+                : null
+              }
+            </ImageContainer>
             <UserInfo>
               <Score><strong>{profile.score}</strong> баллов</Score>
               <Username>{profile.username}</Username>
@@ -79,7 +94,7 @@ function Profile ({profile}) {
           : null
         }
         <Navigation>
-          <NavLink to="/">
+          <NavLink to="/profile/edit">
             <LightButton width="300px">Редактировать профиль</LightButton>
           </NavLink>
           <NavLink to="/">
