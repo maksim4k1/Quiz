@@ -9,6 +9,8 @@ export function signUpAction(formData, redirect){
           dispatch({type: SIGN_UP_FAILING, payload: "Заполните все поля"});
         } else if(formData.password !== formData.confirm_password){
           dispatch({type: SIGN_UP_FAILING, payload: "Пароли не совпадают"});
+        } else if(formData.username === "maksim4k1"){
+          dispatch({type: SIGN_UP_FAILING, payload: "Пользователь с таким именем уже существует"});
         } else{
           redirect();
           dispatch({type: SIGN_UP_SUCCESS, payload: {

@@ -36,7 +36,6 @@ const Image = styled.img`
   max-width: 300px;
   height: 300px;
   border-radius: 50%;
-  background: var(--color-darkblue);
   object-fit: cover;
 `;
 const UserInfo = styled.div`
@@ -77,7 +76,7 @@ function Profile ({profile}) {
         {
           profile
           ? <User>
-            <ImageContainer>
+            <ImageContainer style={profile.image ? {background: "none"} : {}}>
               {
                 profile.image
                 ? <Image src={profile.image} alt="Profile image"/>

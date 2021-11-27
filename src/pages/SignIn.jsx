@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
@@ -25,6 +25,10 @@ const Error = styled.div`
 function SignIn ({info, signIn}) {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({});
+
+  useEffect(() => {
+    info.error = "";
+  }, [info])
 
   function onChangeHandler(event){
     setFormData((data) => ({
@@ -76,7 +80,7 @@ function SignIn ({info, signIn}) {
 }
 
 const mapStateToProps = (state) => ({
-  info: state.auth.signIn
+  info: state.auth.signInState
 });
 const mapDispatchToProps = {
   signIn: signInAction
