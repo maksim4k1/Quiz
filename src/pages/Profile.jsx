@@ -93,11 +93,11 @@ function Profile ({profile}) {
           : null
         }
         <Navigation>
-          <NavLink to="/profile/edit">
-            <LightButton width="300px">Редактировать профиль</LightButton>
-          </NavLink>
           <NavLink to="/">
-            <Button width="400px">Мои викторины</Button>
+            <Button width="300px">Мои викторины</Button>
+          </NavLink>
+          <NavLink to="/profile/edit">
+            <LightButton width="400px">Редактировать профиль</LightButton>
           </NavLink>
         </Navigation>
       </Container>
