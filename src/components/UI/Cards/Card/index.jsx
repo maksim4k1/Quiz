@@ -16,6 +16,9 @@ const CardElement = styled.div`
 const Title = styled.h3`
   font-size: 22px;
   font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 const Description = styled.p`
   color: var(--color-white);
