@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { useParams } from "react-router";
 import styled from "styled-components";
 import Description from "../components/Description";
 import Card from "../components/UI/Cards/Card";
 import CardList from "../components/UI/Lists/CardList";
+import { loadCategoriesAction } from "../redux/actions/categories/loadCategoriesAction";
 import { gap } from "../styles/mixins";
 import randomColorGenerator from "../utils/randomColorGenerator";
 
@@ -14,23 +17,54 @@ const Container = styled.div`
   flex-flow: column;
   ${gap("40px")}
 `;
+const InfoText = styled.div`
+  color: var(--color-text-gray);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+`;
 
-function Category () {
+function Category ({categories, categoriesInfo, loadCategories}) {
+  const {id} = useParams();
+  const [selectedCategory, setSelectedCategory] = useState({});
+
+  useEffect(() => {
+    if(!categories || !categories.length){
+      loadCategories();
+    }
+
+    if(categories){
+      setSelectedCategory(categories.find(category => category.id === Number(id)));
+    }
+  }, [id, loadCategories, categories]);
+
   return(
     <Content>
-      <Container className="container">
-        <Description
-          title="Математика"
-          onChange={() => {}}
-          value={""}
-          description="Викронины на знание основ алгебры и геометрии. Реши задачи и узнай свой уровень в математике!"
-        />
-        <CardList>
-          <Card title="Теорема Виетта" description="Викторина на умение находить корни уравнения через теорему Виетта и через дискриминант" link={`/quiz/1`} fill={randomColorGenerator()}/>
-        </CardList>
-      </Container>
+      {
+        categoriesInfo.loading
+        ? <InfoText>Подождите, идёт загрузка...</InfoText>
+        : <Container className="container">
+          <Description
+            title={selectedCategory.title}
+            onChange={() => {}}
+            value={""}
+            description={selectedCategory.description}
+          />
+          <CardList>
+            <Card title="Теорема Виетта" description="Викторина на умение находить корни уравнения через теорему Виетта и через дискриминант" link={`/quiz/1`} fill={randomColorGenerator()}/>
+          </CardList>
+        </Container>
+      }
     </Content>
   );
 }
 
-export default Category;
+const mapStateToProps = (state) => ({
+  categories: state.categories.categories,
+  categoriesInfo: state.categories.categoriesState
+});
+const mapDispatchToProps = {
+  loadCategories: loadCategoriesAction
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Category);

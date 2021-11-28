@@ -33,10 +33,8 @@ const categoriesReducer = (state=initialState, {type, payload}) => {
         ? state.categories.filter(category => {
           const title = category.title.toLowerCase();
           const description = category.description.toLowerCase();
-          
-          if(title.includes(payload) || description.includes(payload)){
-            return category;
-          }
+
+          return title.includes(payload) || description.includes(payload)
         })
         : null;
 
