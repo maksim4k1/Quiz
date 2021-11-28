@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import Breadcrumbs from "../components/Breadcrumbs";
 import Description from "../components/Description";
 import Card from "../components/UI/Cards/Card";
 import CardList from "../components/UI/Lists/CardList";
 import { findCategoryAction } from "../redux/actions/categories/findCategoryAction";
 import { loadCategoriesAction } from "../redux/actions/categories/loadCategoriesAction";
-import { gap } from "../styles/mixins";
 import randomColorGenerator from "../utils/randomColorGenerator";
 
 const Content = styled.main`
@@ -15,7 +15,6 @@ const Content = styled.main`
 const Container = styled.div`
   display: flex;
   flex-flow: column;
-  ${gap("40px")}
 `;
 const InfoText = styled.div`
   color: var(--color-text-gray);
@@ -42,6 +41,9 @@ function Categories ({categories, foundCategories, info, loadCtegories, findCate
   return(
     <Content>
       <Container className="container">
+        <Breadcrumbs road={[
+          {link: `/categories`, title: "Категории"}
+        ]}/>
         <Description
           title="Категории"
           onChange={onChangeHandler}

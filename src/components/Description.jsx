@@ -8,6 +8,7 @@ import Title from "./UI/Title";
 import { gap } from "../styles/mixins";
 
 const Navigation = styled.div`
+  margin: 0 0 40px;
   display: flex;
   align-items: center;
   flex-flow: wrap;

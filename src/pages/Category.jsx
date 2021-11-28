@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import styled from "styled-components";
+import Breadcrumbs from "../components/Breadcrumbs";
 import Description from "../components/Description";
 import Card from "../components/UI/Cards/Card";
 import CardList from "../components/UI/Lists/CardList";
 import { loadCategoriesAction } from "../redux/actions/categories/loadCategoriesAction";
-import { gap } from "../styles/mixins";
 import randomColorGenerator from "../utils/randomColorGenerator";
 
 const Content = styled.main`
@@ -15,7 +15,6 @@ const Content = styled.main`
 const Container = styled.div`
   display: flex;
   flex-flow: column;
-  ${gap("40px")}
 `;
 const InfoText = styled.div`
   color: var(--color-text-gray);
@@ -42,7 +41,7 @@ function Category ({categories, categoriesInfo, loadCategories}) {
         navigate("/error/404");
       }
     }
-  }, [id, loadCategories, categories]);
+  }, [id, loadCategories, categories, navigate]);
 
   return(
     <Content>
@@ -50,6 +49,10 @@ function Category ({categories, categoriesInfo, loadCategories}) {
         categoriesInfo.loading
         ? <InfoText>Подождите, идёт загрузка...</InfoText>
         : <Container className="container">
+          <Breadcrumbs road={[
+            {link: `/categories`, title: "Категории"},
+            {link: `/category/${selectedCategory.id}`, title: selectedCategory.title}
+          ]}/>
           <Description
             title={selectedCategory.title}
             onChange={() => {}}
