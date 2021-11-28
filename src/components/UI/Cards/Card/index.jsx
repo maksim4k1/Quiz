@@ -5,6 +5,7 @@ import AppLink from "../../AppLink";
 
 const CardElement = styled.div`
   max-width: 320px;
+  width: 100%;
   height: 180px;
   padding: 20px 25px;
   display: flex;

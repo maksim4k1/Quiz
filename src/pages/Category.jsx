@@ -45,25 +45,27 @@ function Category ({categories, categoriesInfo, loadCategories}) {
 
   return(
     <Content>
-      {
-        categoriesInfo.loading
-        ? <InfoText>Подождите, идёт загрузка...</InfoText>
-        : <Container className="container">
-          <Breadcrumbs road={[
-            {link: `/categories`, title: "Категории"},
-            {link: `/category/${selectedCategory.id}`, title: selectedCategory.title}
-          ]}/>
-          <Description
-            title={selectedCategory.title}
-            onChange={() => {}}
-            value={""}
-            description={selectedCategory.description}
-          />
-          <CardList>
-            <Card title="Теорема Виетта" description="Викторина на умение находить корни уравнения через теорему Виетта и через дискриминант" link={`/quiz/1`} fill={randomColorGenerator()}/>
-          </CardList>
-        </Container>
-      }
+      <Container className="container">
+        <Breadcrumbs road={[
+          {link: `/categories`, title: "Категории"},
+          {link: `/category/${id}`, title: selectedCategory.title || "Текущая страница"}
+        ]}/>
+        {
+          categoriesInfo.loading
+          ? <InfoText>Подождите, идёт загрузка...</InfoText>
+          : <>
+            <Description
+              title={selectedCategory.title}
+              onChange={() => {}}
+              value={""}
+              description={selectedCategory.description}
+            />
+            <CardList>
+              <Card title="Теорема Виетта" description="Викторина на умение находить корни уравнения через теорему Виетта и через дискриминант" link={`/quiz/1`} fill={randomColorGenerator()}/>
+            </CardList>
+          </>
+        }
+      </Container>
     </Content>
   );
 }

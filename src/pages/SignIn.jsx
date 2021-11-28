@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router";
 import styled from "styled-components";
+import Breadcrumbs from "../components/Breadcrumbs";
 import AppLink from "../components/UI/AppLink";
 import Button from "../components/UI/Buttons/Button";
 import Form from "../components/UI/Form";
@@ -49,6 +50,9 @@ function SignIn ({info, signIn}) {
   return(
     <Content>
       <div className="form_container">
+        <Breadcrumbs road={[
+          {link: "/signin", title: "Авторизация"}
+        ]}/>
         <Form title="Авторизация" onSubmit={signInHandler}>
 
           <Input

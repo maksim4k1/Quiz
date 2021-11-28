@@ -6,7 +6,7 @@ import { gap } from "../styles/mixins";
 import AppLink from "./UI/AppLink";
 
 const Navigation = styled.nav`
-  margin: 0 0 20px;
+  margin-bottom: 20px;
   display: flex;
   align-items: center;
   ${gap("10px")}
@@ -22,17 +22,14 @@ const Link = styled(AppLink)`
   }
 `;
 
-function Breadcrumbs ({road}) {
+function Breadcrumbs ({road, className}) {
   return(
-    <Navigation>
+    <Navigation className={className}>
       <Link to="/"><HomePageIcon/></Link>
       {
         road && road.length
         ? road.map((item, index) => {
-          return <>
-            <RightArrowIcon/>
-            <AppLink key={index} to={item.link}>{item.title}</AppLink>
-          </>
+          return <AppLink key={index} to={item.link}><RightArrowIcon/>{item.title}</AppLink>
         })
         : null
       }

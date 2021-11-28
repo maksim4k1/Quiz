@@ -21,7 +21,7 @@ const TitleElement = styled.h2`
     height: 4px;
     position: absolute;
     left: 0;
-    bottom: 14px;
+    top: 26px;
     background: var(--color-red);
   }
 `;

@@ -4,13 +4,13 @@ import styled from "styled-components";
 import Button from "../components/UI/Buttons/Button";
 import Form from "../components/UI/Form";
 import Input from "../components/UI/Input";
-import camera_icon from "../assets/icons/camera-icon.svg";
 import convertImageToBase64 from "../utils/convertImageToBae64";
 import { connect } from "react-redux";
 import LightButton from "../components/UI/Buttons/LightButton";
 import { NavLink } from "react-router-dom";
 import { gap } from "../styles/mixins";
 import { editProfileAction } from "../redux/actions/auth/editProfileActions";
+import CameraIcon from "../assets/icons/CameraIcon";
 
 const Content = styled.main`
   margin: 100px 0 150px;
@@ -18,12 +18,11 @@ const Content = styled.main`
 const ImageInputContainer = styled.div`
   width: 240px;
   height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   background-color: var(--color-darkblue);
-  background-image: url(${camera_icon});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 75px;
   border-radius: 50%;
   overflow: hidden;
 `;
@@ -79,56 +78,58 @@ function EditProfile ({profile, info, editProfile}) {
 
   return(
     <Content>
-      <Form className="form_container" onSubmit={editProfileHandler}>
+      <div className="form_container">
+        <Form onSubmit={editProfileHandler}>
 
-        <ImageInputContainer style={formData.image ? {background: "none"} : {}}>
-          <ImageInput
-            name="image"
-            type="file"
-            accept="image/*"
+          <ImageInputContainer style={formData.image ? {background: "none"} : {}}>
+            <ImageInput
+              name="image"
+              type="file"
+              accept="image/*"
+              onChange={onChangeHandler}
+            />
+            {
+              formData.image
+              ? <Image src={formData.image} alt="Profile image"/>
+              : <CameraIcon width="75"/>
+            }
+          </ImageInputContainer>
+
+          <Input
+            name="username"
+            value={formData.username || ""}
+            type="text"
+            placeholder="Имя пользователя"
             onChange={onChangeHandler}
           />
+          <Input
+            name="name"
+            value={formData.name || ""}
+            type="text"
+            placeholder="Ваше имя"
+            onChange={onChangeHandler}
+          />
+          <Input
+            name="description"
+            value={formData.description || ""}
+            type="text"
+            placeholder="Описание"
+            onChange={onChangeHandler}
+          />
+
+          <Buttons>
+            <Button type="submit" disabled={info.loading}>Сохранить</Button>
+            <NavLink to="/profile">
+              <LightButton type="reset" disabled={info.loading}>Не сохранять</LightButton>
+            </NavLink>
+          </Buttons>
           {
-            formData.image
-            ? <Image src={formData.image} alt="Profile image"/>
+            info.error && info.failing
+            ? <Error>{info.error}</Error>
             : null
           }
-        </ImageInputContainer>
-
-        <Input
-          name="username"
-          value={formData.username || ""}
-          type="text"
-          placeholder="Имя пользователя"
-          onChange={onChangeHandler}
-        />
-        <Input
-          name="name"
-          value={formData.name || ""}
-          type="text"
-          placeholder="Ваше имя"
-          onChange={onChangeHandler}
-        />
-        <Input
-          name="description"
-          value={formData.description || ""}
-          type="text"
-          placeholder="Описание"
-          onChange={onChangeHandler}
-        />
-
-        <Buttons>
-          <Button type="submit" disabled={info.loading}>Сохранить</Button>
-          <NavLink to="/profile">
-            <LightButton type="reset" disabled={info.loading}>Не сохранять</LightButton>
-          </NavLink>
-        </Buttons>
-        {
-          info.error && info.failing
-          ? <Error>{info.error}</Error>
-          : null
-        }
-      </Form>
+        </Form>
+      </div>
     </Content>
   );
 }

@@ -16,6 +16,7 @@ const Navigation = styled.div`
   ${gap("20px")}
 `;
 const SearchFrom = styled(Form)`
+  margin: 0 0 0 auto;
   flex-flow: row;
   ${gap("10px")}
 `;

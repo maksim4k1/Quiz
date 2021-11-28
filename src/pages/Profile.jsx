@@ -2,10 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import CameraIcon from "../assets/icons/CameraIcon";
+import Breadcrumbs from "../components/Breadcrumbs";
 import Button from "../components/UI/Buttons/Button";
 import LightButton from "../components/UI/Buttons/LightButton";
 import { gap } from "../styles/mixins";
-import camera_icon from "../assets/icons/camera-icon.svg";
 
 const Content = styled.main`
   margin: 100px 0 150px;
@@ -13,9 +14,9 @@ const Content = styled.main`
 const Container = styled.div`
   display: flex;
   flex-flow: column;
-  ${gap("40px")}
 `;
 const User = styled.div`
+  margin: 0 0 40px;
   display: flex;
   ${gap("40px")}
 `;
@@ -23,11 +24,10 @@ const ImageContainer = styled.div`
   width: 100%;
   max-width: 300px;
   height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--color-darkblue);
-  background-image: url(${camera_icon});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100px;
   border-radius: 50%;
   overflow: hidden;
 `;
@@ -73,6 +73,9 @@ function Profile ({profile}) {
   return(
     <Content>
       <Container className="small_container">
+        <Breadcrumbs road={[
+          {link: `/profile`, title: "Профиль"}
+        ]}/>
         {
           profile
           ? <User>
@@ -80,7 +83,7 @@ function Profile ({profile}) {
               {
                 profile.image
                 ? <Image src={profile.image} alt="Profile image"/>
-                : null
+                : <CameraIcon width="100"/>
               }
             </ImageContainer>
             <UserInfo>
