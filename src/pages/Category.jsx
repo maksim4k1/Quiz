@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import styled from "styled-components";
 import Description from "../components/Description";
 import Card from "../components/UI/Cards/Card";
@@ -26,6 +26,7 @@ const InfoText = styled.div`
 
 function Category ({categories, categoriesInfo, loadCategories}) {
   const {id} = useParams();
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState({});
 
   useEffect(() => {
@@ -34,7 +35,12 @@ function Category ({categories, categoriesInfo, loadCategories}) {
     }
 
     if(categories){
-      setSelectedCategory(categories.find(category => category.id === Number(id)));
+      const category = categories.find(category => category.id === Number(id));
+      if(category){
+        setSelectedCategory(category);
+      } else{
+        navigate("/error/404");
+      }
     }
   }, [id, loadCategories, categories]);
 
