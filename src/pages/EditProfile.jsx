@@ -11,20 +11,38 @@ import { NavLink } from "react-router-dom";
 import { gap } from "../styles/mixins";
 import { editProfileAction } from "../redux/actions/auth/editProfileActions";
 import CameraIcon from "../assets/icons/CameraIcon";
+import Breadcrumbs from "../components/Breadcrumbs";
 
 const Content = styled.main`
   margin: 100px 0 150px;
 `;
 const ImageInputContainer = styled.div`
-  width: 240px;
-  height: 240px;
+  width: 250px;
+  height: 250px;
   display: flex;
   align-items: center;
+  position: relative;
   justify-content: center;
   position: relative;
   background-color: var(--color-darkblue);
   border-radius: 50%;
   overflow: hidden;
+  &::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  &:hover{
+    &::before{
+      opacity: 1;
+    }
+  }
 `;
 const ImageInput = styled.input`
   position: absolute;
@@ -79,6 +97,10 @@ function EditProfile ({profile, info, editProfile}) {
   return(
     <Content>
       <div className="form_container">
+        <Breadcrumbs road={[
+          {link: "/profile", title: "Профиль"},
+          {link: "/profile/edit", title: "Редактировать профиль"},
+        ]}/>
         <Form onSubmit={editProfileHandler}>
 
           <ImageInputContainer style={formData.image ? {background: "none"} : {}}>
