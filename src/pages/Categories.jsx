@@ -7,6 +7,7 @@ import CardList from "../components/UI/Lists/CardList";
 import { findCategoryAction } from "../redux/actions/categories/findCategoryAction";
 import { loadCategoriesAction } from "../redux/actions/categories/loadCategoriesAction";
 import { gap } from "../styles/mixins";
+import randomColorGenerator from "../utils/randomColorGenerator";
 
 const Content = styled.main`
   margin: 100px 0 150px;
@@ -30,7 +31,7 @@ function Categories ({categories, foundCategories, info, loadCtegories, findCate
     if(!categories || !categories.length){
       loadCtegories();
     }
-    
+
     findCategory(serchValue);
   }, [loadCtegories, categories, findCategory, serchValue]);
 
@@ -53,7 +54,7 @@ function Categories ({categories, foundCategories, info, loadCtegories, findCate
           ? <CardList>
             {
               foundCategories.map(category => {
-                return <Card key={category.id} title={category.title} description={category.description} link={`/category/${category.id}`} fill="#D6D6D6"/>
+                return <Card key={category.id} title={category.title} description={category.description} link={`/category/${category.id}`} fill={randomColorGenerator()}/>
               })
             }
           </CardList>
