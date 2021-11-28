@@ -23,13 +23,13 @@ const DescriptionElement = styled.p`
   color: var(--color-text-gray);
 `;
 
-function Description ({title, onSubmit, onChange, value, description}) {
+function Description ({title, onChange, value, description}) {
   return(
     <Navigation>
       <Title>{title}</Title>
       {
-        onSubmit && onChange
-        ? <SearchFrom onSubmit={onSubmit}>
+        onChange
+        ? <SearchFrom onSubmit={(event) => event.preventDefault()}>
           <Input
             type="text"
             name="search"

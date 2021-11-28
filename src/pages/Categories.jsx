@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Description from "../components/Description";
 import Card from "../components/UI/Cards/Card";
 import CardList from "../components/UI/Lists/CardList";
+import { findCategoryAction } from "../redux/actions/categories/findCategoryAction";
 import { loadCategoriesAction } from "../redux/actions/categories/loadCategoriesAction";
 import { gap } from "../styles/mixins";
 
@@ -22,18 +23,16 @@ const InfoText = styled.div`
   text-align: center;
 `;
 
-function Categories ({categories, info, loadCtegories}) {
+function Categories ({categories, foundCategories, info, loadCtegories, findCategory}) {
   const [serchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     if(!categories || !categories.length){
       loadCtegories();
     }
-  }, [loadCtegories, categories]);
-
-  function searcHandler(event){
-    event.preventDefault();
-  }
+    
+    findCategory(serchValue);
+  }, [loadCtegories, categories, findCategory, serchValue]);
 
   function onChangeHandler(event){
     setSearchValue(event.target.value);
@@ -44,24 +43,22 @@ function Categories ({categories, info, loadCtegories}) {
       <Container className="container">
         <Description
           title="Категории"
-          onSubmit={searcHandler}
           onChange={onChangeHandler}
           value={serchValue}
         />
         {
           info.loading
           ? <InfoText>Подождите, идёт загрузка...</InfoText>
-          : categories && categories.length
+          : foundCategories && foundCategories.length
           ? <CardList>
             {
-              categories.map(category => {
+              foundCategories.map(category => {
                 return <Card key={category.id} title={category.title} description={category.description} link={`/category/${category.id}`} fill="#D6D6D6"/>
               })
             }
           </CardList>
           : <InfoText>Категории не найдены</InfoText>
         }
-        
       </Container>
     </Content>
   );
@@ -69,10 +66,12 @@ function Categories ({categories, info, loadCtegories}) {
 
 const mapStateToProps = (state) => ({
   categories: state.categories.categories,
+  foundCategories: state.categories.foundCategories,
   info: state.categories.categoriesState
 });
 const mapDispatchToProps = {
   loadCtegories: loadCategoriesAction,
+  findCategory: findCategoryAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Categories);
