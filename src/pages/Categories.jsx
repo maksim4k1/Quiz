@@ -23,16 +23,16 @@ const InfoText = styled.div`
   text-align: center;
 `;
 
-function Categories ({categories, foundCategories, info, loadCtegories, findCategory}) {
-  const [serchValue, setSearchValue] = useState("");
+function Categories ({categories, foundCategories, info, loadCategories, findCategory}) {
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     if(!categories || !categories.length){
-      loadCtegories();
+      loadCategories();
     }
 
-    findCategory(serchValue);
-  }, [loadCtegories, categories, findCategory, serchValue]);
+    findCategory(searchValue);
+  }, [loadCategories, categories, findCategory, searchValue]);
 
   function onChangeHandler(event){
     setSearchValue(event.target.value);
@@ -47,7 +47,7 @@ function Categories ({categories, foundCategories, info, loadCtegories, findCate
         <Description
           title="Категории"
           onChange={onChangeHandler}
-          value={serchValue}
+          value={searchValue}
         />
         {
           info.loading
@@ -73,7 +73,7 @@ const mapStateToProps = (state) => ({
   info: state.categories.categoriesState
 });
 const mapDispatchToProps = {
-  loadCtegories: loadCategoriesAction,
+  loadCategories: loadCategoriesAction,
   findCategory: findCategoryAction
 };
 

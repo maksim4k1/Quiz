@@ -7,6 +7,7 @@ import Description from "../components/Description";
 import Card from "../components/UI/Cards/Card";
 import CardList from "../components/UI/Lists/CardList";
 import { loadCategoriesAction } from "../redux/actions/categories/loadCategoriesAction";
+import { findQuizAction } from "../redux/actions/quizzes/findQuizAction";
 import { loadQuizzesAction } from "../redux/actions/quizzes/loadQuizzesAction";
 import randomColorGenerator from "../utils/randomColorGenerator";
 
@@ -24,10 +25,11 @@ const InfoText = styled.div`
   text-align: center;
 `;
 
-function Category ({categories, categoriesInfo, loadCategories, quizzes, quizzesInfo, loadQuizzes}) {
+function Category ({categories, categoriesInfo, loadCategories, quizzes, foundQuizzes, findQuiz, quizzesInfo, loadQuizzes}) {
   const {id} = useParams();
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState({});
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     if(!categories || !categories.length){
@@ -42,13 +44,19 @@ function Category ({categories, categoriesInfo, loadCategories, quizzes, quizzes
         navigate("/error/404");
       }
     }
-  }, [id, loadCategories, categories, navigate, quizzes, loadQuizzes]);
+
+    findQuiz(searchValue);
+  }, [id, loadCategories, categories, navigate, quizzes, loadQuizzes, searchValue, findQuiz]);
 
   useEffect(() => {
     if(categories){
       loadQuizzes(id);
     }
-  }, [categories, id, loadQuizzes])
+  }, [categories, id, loadQuizzes]);
+
+  function onChangeHandler(event){
+    setSearchValue(event.target.value);
+  }
 
   return(
     <Content>
@@ -63,17 +71,17 @@ function Category ({categories, categoriesInfo, loadCategories, quizzes, quizzes
           : <>
             <Description
               title={selectedCategory.title}
-              onChange={() => {}}
-              value={""}
+              onChange={onChangeHandler}
+              value={searchValue}
               description={selectedCategory.description}
             />
             {
               quizzesInfo.loading
               ? <InfoText>Подождите, идёт загрузка...</InfoText>
-              : quizzes && quizzes.length
+              : foundQuizzes && foundQuizzes.length
               ? <CardList>
                 {
-                  quizzes.map(quiz => {
+                  foundQuizzes.map(quiz => {
                     return <Card key={quiz.id} title={quiz.title} description={quiz.description} link={`/quiz/${quiz.id}`} fill={randomColorGenerator()}/>
                   })
                 }
@@ -91,11 +99,13 @@ const mapStateToProps = (state) => ({
   categories: state.categories.categories,
   categoriesInfo: state.categories.categoriesState,
   quizzes: state.quizzes.quizzes,
+  foundQuizzes: state.quizzes.foundQuizzes,
   quizzesInfo: state.quizzes.quizzesState,
 });
 const mapDispatchToProps = {
   loadCategories: loadCategoriesAction,
-  loadQuizzes: loadQuizzesAction
+  loadQuizzes: loadQuizzesAction,
+  findQuiz: findQuizAction
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category);

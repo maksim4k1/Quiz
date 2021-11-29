@@ -27,7 +27,7 @@ const categoriesReducer = (state=initialState, {type, payload}) => {
         categoriesState: stateCreator(FAILING, payload)
       }
     }
-    // FindCategory
+    // Find Category
     case FIND_CATEGORY: {
       const foundCategories = state.categories
         ? state.categories.filter(category => {
