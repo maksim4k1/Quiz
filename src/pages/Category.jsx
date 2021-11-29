@@ -7,6 +7,7 @@ import Description from "../components/Description";
 import Card from "../components/UI/Cards/Card";
 import CardList from "../components/UI/Lists/CardList";
 import { loadCategoriesAction } from "../redux/actions/categories/loadCategoriesAction";
+import { loadQuizzesAction } from "../redux/actions/quizzes/loadQuizzesAction";
 import randomColorGenerator from "../utils/randomColorGenerator";
 
 const Content = styled.main`
@@ -23,7 +24,7 @@ const InfoText = styled.div`
   text-align: center;
 `;
 
-function Category ({categories, categoriesInfo, loadCategories}) {
+function Category ({categories, categoriesInfo, loadCategories, quizzes, quizzesInfo, loadQuizzes}) {
   const {id} = useParams();
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState({});
@@ -41,7 +42,13 @@ function Category ({categories, categoriesInfo, loadCategories}) {
         navigate("/error/404");
       }
     }
-  }, [id, loadCategories, categories, navigate]);
+  }, [id, loadCategories, categories, navigate, quizzes, loadQuizzes]);
+
+  useEffect(() => {
+    if(categories){
+      loadQuizzes(id);
+    }
+  }, [categories, id, loadQuizzes])
 
   return(
     <Content>
@@ -60,9 +67,19 @@ function Category ({categories, categoriesInfo, loadCategories}) {
               value={""}
               description={selectedCategory.description}
             />
-            <CardList>
-              <Card title="Теорема Виетта" description="Викторина на умение находить корни уравнения через теорему Виетта и через дискриминант" link={`/quiz/1`} fill={randomColorGenerator()}/>
-            </CardList>
+            {
+              quizzesInfo.loading
+              ? <InfoText>Подождите, идёт загрузка...</InfoText>
+              : quizzes && quizzes.length
+              ? <CardList>
+                {
+                  quizzes.map(quiz => {
+                    return <Card key={quiz.id} title={quiz.title} description={quiz.description} link={`/quiz/${quiz.id}`} fill={randomColorGenerator()}/>
+                  })
+                }
+              </CardList>
+              : <InfoText>Викторины не найдены</InfoText>
+            }
           </>
         }
       </Container>
@@ -72,10 +89,13 @@ function Category ({categories, categoriesInfo, loadCategories}) {
 
 const mapStateToProps = (state) => ({
   categories: state.categories.categories,
-  categoriesInfo: state.categories.categoriesState
+  categoriesInfo: state.categories.categoriesState,
+  quizzes: state.quizzes.quizzes,
+  quizzesInfo: state.quizzes.quizzesState,
 });
 const mapDispatchToProps = {
-  loadCategories: loadCategoriesAction
+  loadCategories: loadCategoriesAction,
+  loadQuizzes: loadQuizzesAction
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Category);

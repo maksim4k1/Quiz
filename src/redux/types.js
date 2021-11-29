@@ -24,6 +24,11 @@ export const LOAD_CATEGORIES_FAILING = "LOAD_CATEGORIES_FAILING";
 // Find Category
 export const FIND_CATEGORY = "FIND_CATEGORY";
 
+// Load Quizzes
+export const LOAD_QUIZZES_SUCCESS = "LOAD_QUIZZES_SUCCESS";
+export const LOAD_QUIZZES_LOADING = "LOAD_QUIZZES_LOADING";
+export const LOAD_QUIZZES_FAILING = "LOAD_QUIZZES_FAILING";
+
 export const SUCCESS = "SUCCESS";
 export const LOADING = "LOADING";
 export const FAILING = "FAILING";
