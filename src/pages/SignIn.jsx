@@ -51,7 +51,7 @@ function SignIn ({info, signIn}) {
     <Content>
       <div className="form_container">
         <Breadcrumbs road={[
-          {link: "/signin", title: "Авторизация"}
+          {title: "Авторизация"}
         ]}/>
         <Form title="Авторизация" onSubmit={signInHandler}>
 

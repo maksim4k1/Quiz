@@ -51,7 +51,7 @@ function SignUp ({info, signUp}) {
     <Content>
       <div className="form_container">
         <Breadcrumbs road={[
-          {link: "/signup", title: "Регистрация"}
+          {title: "Регистрация"}
         ]}/>
         <Form title="Регистрация" onSubmit={signUpHandler}>
 

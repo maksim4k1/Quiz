@@ -21,6 +21,14 @@ const Link = styled(AppLink)`
     }
   }
 `;
+const ThisPage = styled.p`
+  display: inline-flex;
+  align-items: center;
+  ${gap("10px")}
+  color: var(--color-text-gray);
+  font-size: 14px;
+  font-weight: 600;
+`;
 
 function Breadcrumbs ({road, className}) {
   return(
@@ -29,7 +37,9 @@ function Breadcrumbs ({road, className}) {
       {
         road && road.length
         ? road.map((item, index) => {
-          return <AppLink key={index} to={item.link}><RightArrowIcon/>{item.title}</AppLink>
+          return item.link
+          ? <AppLink key={index} to={item.link}><RightArrowIcon/>{item.title}</AppLink>
+          : <ThisPage key={index}><RightArrowIcon/>{item.title}</ThisPage>
         })
         : null
       }

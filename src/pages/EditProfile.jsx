@@ -99,7 +99,7 @@ function EditProfile ({profile, info, editProfile}) {
       <div className="form_container">
         <Breadcrumbs road={[
           {link: "/profile", title: "Профиль"},
-          {link: "/profile/edit", title: "Редактировать профиль"},
+          {title: "Редактировать профиль"},
         ]}/>
         <Form onSubmit={editProfileHandler}>
 

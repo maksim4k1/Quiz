@@ -42,7 +42,7 @@ function Categories ({categories, foundCategories, info, loadCategories, findCat
     <Content>
       <Container className="container">
         <Breadcrumbs road={[
-          {link: `/categories`, title: "Категории"}
+          {title: "Категории"}
         ]}/>
         <Description
           title="Категории"

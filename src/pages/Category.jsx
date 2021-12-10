@@ -63,7 +63,7 @@ function Category ({categories, categoriesInfo, loadCategories, quizzes, foundQu
       <Container className="container">
         <Breadcrumbs road={[
           {link: `/categories`, title: "Категории"},
-          {link: `/category/${id}`, title: selectedCategory.title || "Текущая страница"}
+          {title: selectedCategory.title || "Текущая страница"}
         ]}/>
         {
           categoriesInfo.loading

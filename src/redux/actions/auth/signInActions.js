@@ -7,7 +7,7 @@ export function signInAction(formData, redirect){
       setTimeout(() => {
         if(!formData.username || !formData.password){
           dispatch({type: SIGN_IN_FAILING, payload: "Заполните все поля"});
-        } else if(formData.username !== "Maks" && formData.password !== "1234"){
+        } else if(formData.username !== "Maks" || formData.password !== "1234"){
           dispatch({type: SIGN_IN_FAILING, payload: "Такого пользователя не найдено"});
         } else{
           redirect();

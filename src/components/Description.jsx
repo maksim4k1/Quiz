@@ -25,9 +25,9 @@ const DescriptionElement = styled.p`
   color: var(--color-text-gray);
 `;
 
-function Description ({title, onChange, value, description}) {
+function Description ({title, onChange, value, description, style}) {
   return(
-    <Navigation>
+    <Navigation style={style}>
       <Title>{title}</Title>
       {
         onChange

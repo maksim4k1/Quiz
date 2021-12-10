@@ -74,7 +74,7 @@ function Profile ({profile}) {
     <Content>
       <Container className="small_container">
         <Breadcrumbs road={[
-          {link: `/profile`, title: "Профиль"}
+          {title: "Профиль"}
         ]}/>
         {
           profile
