@@ -4,12 +4,12 @@ import styled from "styled-components";
 import Button from "../components/UI/Buttons/Button";
 import Form from "../components/UI/Form";
 import Input from "../components/UI/Input";
-import convertImageToBase64 from "../utils/convertImageToBae64";
+import convertImageToBase64 from "../utils/convertImageToBase64";
 import { connect } from "react-redux";
 import LightButton from "../components/UI/Buttons/LightButton";
 import { NavLink } from "react-router-dom";
 import { gap } from "../styles/mixins";
-import { editProfileAction } from "../redux/actions/auth/editProfileActions";
+import { editProfileAction } from "../redux/actions/auth/editProfileAction";
 import CameraIcon from "../assets/icons/CameraIcon";
 import Breadcrumbs from "../components/Breadcrumbs";
 

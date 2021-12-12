@@ -37,9 +37,11 @@ function Breadcrumbs ({road, className}) {
       {
         road && road.length
         ? road.map((item, index) => {
-          return item.link
-          ? <AppLink key={index} to={item.link}><RightArrowIcon/>{item.title}</AppLink>
-          : <ThisPage key={index}><RightArrowIcon/>{item.title}</ThisPage>
+          if(item){
+            return item.link
+            ? <AppLink key={index} to={item.link}><RightArrowIcon/>{item.title}</AppLink>
+            : <ThisPage key={index}><RightArrowIcon/>{item.title}</ThisPage>
+          } else return null
         })
         : null
       }

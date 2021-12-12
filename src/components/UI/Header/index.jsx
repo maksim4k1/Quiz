@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { logOutAction } from "../../../redux/actions/auth/logOutActions";
+import { logOutAction } from "../../../redux/actions/auth/logOutAction";
 import { gap } from "../../../styles/mixins";
 import Button from "../Buttons/Button";
 import LightButton from "../Buttons/LightButton";

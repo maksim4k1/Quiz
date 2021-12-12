@@ -7,7 +7,7 @@ import AppLink from "../components/UI/AppLink";
 import Button from "../components/UI/Buttons/Button";
 import Form from "../components/UI/Form";
 import Input from "../components/UI/Input";
-import { signInAction } from "../redux/actions/auth/signInActions";
+import { signInAction } from "../redux/actions/auth/signInAction";
 
 const Content = styled.main`
   margin: 100px 0 150px;

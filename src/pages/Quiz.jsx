@@ -1,9 +1,15 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
+import { connect } from "react-redux";
 import { useParams } from "react-router";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Description from "../components/Description";
 import Button from "../components/UI/Buttons/Button";
+import { loadCategoriesAction } from "../redux/actions/categories/loadCategoriesAction";
+import { loadQuizAction } from "../redux/actions/quiz/loadQuizAction";
 import { gap } from "../styles/mixins";
 
 const Content = styled.main`
@@ -21,33 +27,79 @@ const Info = styled.ul`
     margin: 0 0 0 10px;
   }
 `;
+const InfoText = styled.div`
+  color: var(--color-text-gray);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+`;
 
-function Quiz () {
+function Quiz ({quiz, quizInfo, loadQuiz, categories, categoriesInfo, loadCategories}) {
   const {id} = useParams();
+  const [category, setCategory] = useState("");
+
+  useEffect(() => {
+    loadQuiz(id);
+  }, [id, loadQuiz]);
+
+  useEffect(() => {
+    if(!categories){
+      loadCategories();
+    }
+    if(categories && quiz){
+      setCategory(categories.find(category => category.id === quiz.category).title);
+    }
+  }, [categories, quiz, loadCategories]);
 
   return(
     <Content>
       <div className="container">
-        <Breadcrumbs road={[
-          {link: `/categories`, title: "Категории"},
-          {link: `/category/1`, title: "Математика"},
-          {title: "Теорема Виетта"}
-        ]}/>
-        <Description
-          title="Теорема Виетта"
-          description="Викторина на умение находить корни уравнения через теорему Виетта и через дискриминант."
-          style={{margin: 0}}
-        />
-        <Info>
-          <p>Максимальное кол-во баллов: <strong>{id}</strong></p>
-          <p>Количество вопросов: <strong>{id}</strong></p>
-          <p>Категория: <strong>Математика</strong></p>
-          <p>Автор: <strong>maksim4k1</strong></p>
-        </Info>
-        <Button>Пройти</Button>
+        {
+          quizInfo.loading || categoriesInfo.loading
+          ? <InfoText>Загрузка...</InfoText>
+          : <Breadcrumbs road={[
+            {link: `/categories`, title: "Категории"},
+            quiz ? {link: `/category/${quiz.category}`, title: category} : null,
+            {title: quiz ? quiz.name : "Текущая страница"}
+          ]}/>
+        }
+        {
+          quizInfo.loading || categoriesInfo.loading
+          ? null
+          : quizInfo.error
+          ? <InfoText>{quizInfo.error}</InfoText>
+          : quiz
+          ? <>
+            
+            <Description
+              title={quiz.name}
+              description={quiz.description}
+              style={{margin: 0}}
+            />
+            <Info>
+              <p>Максимальное кол-во баллов: <strong>{quiz.questions.length}</strong></p>
+              <p>Количество вопросов: <strong>{quiz.questions.length}</strong></p>
+              <p>Категория: <strong>{category}</strong></p>
+              <p>Автор: <strong>{quiz.author}</strong></p>
+            </Info>
+            <NavLink to={`/quiz/game/${id}`}><Button>Пройти</Button></NavLink>
+          </>
+          : null
+        }
       </div>
     </Content>
   );
 }
 
-export default Quiz;
+const mapStateToProps = (state) => ({
+  quiz: state.quiz.quiz,
+  quizInfo: state.quiz.quizState,
+  categories: state.categories.categories,
+  categoriesInfo: state.categories.categoriesState,
+});
+const mapDispatchToProps = {
+  loadQuiz: loadQuizAction,
+  loadCategories: loadCategoriesAction,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Quiz);

@@ -32,6 +32,11 @@ export const LOAD_QUIZZES_FAILING = "LOAD_QUIZZES_FAILING";
 // Find Quiz
 export const FIND_QUIZ = "FIND_QUIZ";
 
+// Load Quiz
+export const LOAD_QUIZ_SUCCESS = "LOAD_QUIZ_SUCCESS";
+export const LOAD_QUIZ_LOADING = "LOAD_QUIZ_LOADING";
+export const LOAD_QUIZ_FAILING = "LOAD_QUIZ_FAILING";
+
 export const SUCCESS = "SUCCESS";
 export const LOADING = "LOADING";
 export const FAILING = "FAILING";
