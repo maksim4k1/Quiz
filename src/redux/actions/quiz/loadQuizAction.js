@@ -8,7 +8,7 @@ export function loadQuizAction(id){
         let data = null;
         if(id === "1"){
           data = {
-            id: 1,
+            id: "1",
             name: "Теорема Виетта",
             description: "Викторина на умение находить корни уравнения через теорему Виетта и через дискриминант.",
             category: 1,
@@ -22,6 +22,24 @@ export function loadQuizAction(id){
                   { answer: "8", isTrue: false },
                   { answer: "Нет правильного ответа", isTrue: false }
                 ]
+              },
+              {
+                question: "Решите пример: 4 + 5 = ...",
+                answers: [
+                  { answer: "9", isTrue: true },
+                  { answer: "5", isTrue: false },
+                  { answer: "8", isTrue: false },
+                  { answer: "Нет правильного ответа", isTrue: false }
+                ]
+              },
+              {
+                question: "Решите пример: 8 * 7 = ...",
+                answers: [
+                  { answer: "15", isTrue: false },
+                  { answer: "64", isTrue: false },
+                  { answer: "56", isTrue: true },
+                  { answer: "Нет правильного ответа", isTrue: false }
+                ]
               }
             ],
             results: [
@@ -30,8 +48,6 @@ export function loadQuizAction(id){
           }
         } else{
           dispatch({type: LOAD_QUIZ_FAILING, payload: "Ошибка на сервере"});
-          dispatch({type: LOAD_QUIZ_SUCCESS, payload: data});
-          return;
         }
         dispatch({type: LOAD_QUIZ_SUCCESS, payload: data});
       }, 500);
