@@ -5,6 +5,9 @@ import UserCard from "../components/UI/Cards/UserCard";
 import UsersList from "../components/UI/Lists/UsersList";
 import { gap } from "../styles/mixins";
 import user from "../assets/images/user.png";
+import { connect } from "react-redux";
+import { loadRatingAction } from "../redux/actions/rating/loadRatingAction";
+import { useEffect } from "react";
 
 const Content = styled.main`
   margin: 100px 0 150px;
@@ -61,40 +64,74 @@ const Image = styled.img`
   border: none;
   border-radius: 50%;
   background: var(--color-darkblue);
+  object-fit: cover;
 `;
 const Username = styled.h5`
   font-size: 20px;
 `;
+const InfoText = styled.div`
+  color: var(--color-text-gray);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+`;
 
-function Rating () {
+function Rating ({rating, info, loadRating}) {
+  useEffect(() => {
+    if(!rating){
+      loadRating();
+    }
+  }, [loadRating, rating]);
+
   return(
     <Content>
       <div className="form_container">
         <Breadcrumbs road={[
           {title: "Рейтинг игроков"}
         ]}/>
-        <Top>
-          <SecondPlase>
-            <Image src={user}/>
-            <Username>Username</Username>
-          </SecondPlase>
-          <FirstPlase>
-            <Image src={user}/>
-            <Username>Username</Username>
-          </FirstPlase>
-          <ThirdPlase>
-            <Image src={user}/>
-            <Username>Username</Username>
-          </ThirdPlase>
-        </Top>
-        <UsersList>
-          <UserCard username="4. User Name"/>
-          <UserCard username="5. User Name"/>
-          <UserCard username="6. User Name"/>
-        </UsersList>
+        {
+          info.loading
+          ? <InfoText>Загрузка...</InfoText>
+          : rating
+          ? <>
+            <Top>
+              <SecondPlase>
+                <Image src={rating[1].image || user}/>
+                <Username>{rating[1].username}</Username>
+              </SecondPlase>
+              <FirstPlase>
+                <Image src={rating[0].image || user}/>
+                <Username>{rating[0].username}</Username>
+              </FirstPlase>
+              <ThirdPlase>
+                <Image src={rating[2].image || user}/>
+                <Username>{rating[2].username}</Username>
+              </ThirdPlase>
+            </Top>
+            <UsersList>
+              {
+                rating.map((user) => {
+                  if(user.place > 3){
+                    return <UserCard key={user.place} image={user.image} username={`${user.place}. ${user.username}`}/>
+                  }
+                  return null
+                })
+              }
+            </UsersList>
+          </>
+          : <InfoText>{info.error}</InfoText>
+        }
       </div>
     </Content>
   );
 }
 
-export default Rating;
+const mapStateToProps = (state) => ({
+  rating: state.rating.rating,
+  info: state.rating.ratingState,
+});
+const mapDispatchToProps = {
+  loadRating: loadRatingAction
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Rating);

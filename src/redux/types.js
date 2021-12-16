@@ -40,6 +40,11 @@ export const LOAD_QUIZ_FAILING = "LOAD_QUIZ_FAILING";
 // Set selectd answers
 export const SET_SELECTED_ANSWERS = "SET_SELECTED_ANSWERS";
 
+// Load rating
+export const LOAD_RATING_SUCCESS = "LOAD_RATING_SUCCESS";
+export const LOAD_RATING_LOADING = "LOAD_RATING_LOADING";
+export const LOAD_RATING_FAILING = "LOAD_RATING_FAILING";
+
 export const SUCCESS = "SUCCESS";
 export const LOADING = "LOADING";
 export const FAILING = "FAILING";

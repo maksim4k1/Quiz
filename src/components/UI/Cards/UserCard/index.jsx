@@ -21,6 +21,7 @@ const Image = styled.img`
   border: none;
   border-radius: 50%;
   background: var(--color-darkblue);
+  object-fit: cover;
 `;
 const Username = styled.h6`
   font-size: 18px;
