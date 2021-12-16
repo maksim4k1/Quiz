@@ -54,7 +54,6 @@ function Game ({quiz, quizInfo, loadQuiz, setSelectedAnswers}) {
     }
 
     answer.myAnswer = true;
-    console.log(quiz)
 
     for(let i = 0; i < buttons.length; i++){
       buttons[i].setAttribute("disabled", true);
