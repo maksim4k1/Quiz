@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import AnswerCard from "../components/UI/Cards/AnswerCard";
 import { loadQuizAction } from "../redux/actions/quiz/loadQuizAction";
+import { setSelectedAnswersAction } from "../redux/actions/quiz/setSelectedAnswersAction";
 import { gap } from "../styles/mixins";
 
 const Content = styled.main`
@@ -29,7 +30,7 @@ const Answers = styled.div`
   ${gap("100px", "50px")}
 `;
 
-function Game ({quiz, quizInfo, loadQuiz}) {
+function Game ({quiz, quizInfo, loadQuiz, setSelectedAnswers}) {
   const {id} = useParams();
   const navigate = useNavigate();
   const [question, setQuestion] = useState(0);
@@ -52,6 +53,9 @@ function Game ({quiz, quizInfo, loadQuiz}) {
       event.target.style.background = "var(--color-red)";
     }
 
+    answer.myAnswer = true;
+    console.log(quiz)
+
     for(let i = 0; i < buttons.length; i++){
       buttons[i].setAttribute("disabled", true);
     }
@@ -60,6 +64,7 @@ function Game ({quiz, quizInfo, loadQuiz}) {
       if(quiz.questions.length > question + 1){
         setQuestion((question) => question + 1);
       } else{
+        setSelectedAnswers(quiz);
         navigate("/game/result/");
       }
       
@@ -103,7 +108,8 @@ const mapStateToProps = (state) => ({
   quizInfo: state.quiz.quizState,
 });
 const mapDispatchToProps = {
-  loadQuiz: loadQuizAction
+  loadQuiz: loadQuizAction,
+  setSelectedAnswers: setSelectedAnswersAction
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

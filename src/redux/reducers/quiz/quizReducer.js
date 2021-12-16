@@ -1,5 +1,5 @@
 import stateCreator from "../../../utils/stateCreator";
-import { FAILING, LOADING, LOAD_QUIZ_FAILING, LOAD_QUIZ_LOADING, LOAD_QUIZ_SUCCESS, SUCCESS } from "../../types";
+import { FAILING, LOADING, LOAD_QUIZ_FAILING, LOAD_QUIZ_LOADING, LOAD_QUIZ_SUCCESS, SET_SELECTED_ANSWERS, SUCCESS } from "../../types";
 
 const initialState = {
   quiz: null,
@@ -25,6 +25,14 @@ const quizReducer = (state=initialState, {type, payload}) => {
         ...state,
         quizState: stateCreator(FAILING, payload)
       }
+    }
+    // Set selectd answers
+    case SET_SELECTED_ANSWERS: {
+      return {
+        ...state,
+        quiz: payload,
+        quizState: stateCreator()
+      };
     }
     default: {
       return state;

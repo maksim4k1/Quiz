@@ -37,6 +37,9 @@ export const LOAD_QUIZ_SUCCESS = "LOAD_QUIZ_SUCCESS";
 export const LOAD_QUIZ_LOADING = "LOAD_QUIZ_LOADING";
 export const LOAD_QUIZ_FAILING = "LOAD_QUIZ_FAILING";
 
+// Set selectd answers
+export const SET_SELECTED_ANSWERS = "SET_SELECTED_ANSWERS";
+
 export const SUCCESS = "SUCCESS";
 export const LOADING = "LOADING";
 export const FAILING = "FAILING";

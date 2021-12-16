@@ -41,7 +41,7 @@ function Footer ({isAuth}) {
           }
           
           <AppLink to="/categories" color="var(--color-white)">Категории</AppLink>
-          <AppLink to="/" color="var(--color-white)">Рейтинг игроков</AppLink>
+          <AppLink to="/rating" color="var(--color-white)">Рейтинг игроков</AppLink>
         </Navigation>
       </Container>
     </FooterElement>
