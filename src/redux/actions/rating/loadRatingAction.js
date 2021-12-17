@@ -1,7 +1,7 @@
 import { LOAD_RATING_FAILING, LOAD_RATING_LOADING, LOAD_RATING_SUCCESS } from "../../types"
 
 export function loadRatingAction(){
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({type: LOAD_RATING_LOADING});
     setTimeout(() => {
       try{

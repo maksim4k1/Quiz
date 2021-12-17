@@ -6,6 +6,8 @@ import Form from "./UI/Form";
 import Input from "./UI/Input";
 import Title from "./UI/Title";
 import { gap } from "../styles/mixins";
+import Button from "./UI/Buttons/Button";
+import { NavLink } from "react-router-dom";
 
 const Navigation = styled.div`
   margin: 0 0 40px;
@@ -25,7 +27,7 @@ const DescriptionElement = styled.p`
   color: var(--color-text-gray);
 `;
 
-function Description ({title, onChange, value, description, style}) {
+function Description ({title, onChange, value, description, style, link, linkText}) {
   return(
     <Navigation style={style}>
       <Title>{title}</Title>
@@ -47,6 +49,8 @@ function Description ({title, onChange, value, description, style}) {
       {
         description
         ? <div style={{width: "100%"}}><DescriptionElement>{description}</DescriptionElement></div>
+        : link
+        ? <NavLink to={link}><Button>{linkText}</Button></NavLink>
         : null
       }
     </Navigation>

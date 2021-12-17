@@ -37,8 +37,21 @@ export const LOAD_QUIZ_SUCCESS = "LOAD_QUIZ_SUCCESS";
 export const LOAD_QUIZ_LOADING = "LOAD_QUIZ_LOADING";
 export const LOAD_QUIZ_FAILING = "LOAD_QUIZ_FAILING";
 
-// Set selectd answers
+// Set selected answers
 export const SET_SELECTED_ANSWERS = "SET_SELECTED_ANSWERS";
+
+// Buttons state
+export const DISABLE_GAME_BUTTONS = "DISABLE_GAME_BUTTONS";
+export const ENABLE_GAME_BUTTONS = "ENABLE_GAME_BUTTONS";
+
+// Next question
+export const NEXT_QUESTION = "NEXT_QUESTION";
+
+// Right answer
+export const RIGHT_ANSWER = "RIGHT_ANSWER";
+
+// Set background color
+export const SET_BACKGROUND_COLOR = "SET_BACKGROUND_COLOR";
 
 // Load rating
 export const LOAD_RATING_SUCCESS = "LOAD_RATING_SUCCESS";

@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -47,21 +46,12 @@ const Buttons = styled.div`
   ${gap("30px")}
 `;
 
-function GameResult ({quiz}) {
+function GameResult ({quiz, quizLogic}) {
   const navigate = useNavigate();
-  const [rightAnswers, setRightAnswers] = useState(0);
 
   useEffect(() => {
     if(!quiz){
       navigate("/error/404");
-    } else{
-      for(let i = 0; i < quiz.questions.length; i++){
-        const question = quiz.questions[i];
-
-        if(question.answers.find((answer) => answer.myAnswer === answer.isTrue)){
-          setRightAnswers((data) => data + 1);
-        }
-      }
     }
   }, [quiz, navigate]);
 
@@ -79,13 +69,18 @@ function GameResult ({quiz}) {
             ]}/>
             <Container>
               <Title>Результат прохождения</Title>
-              <Score>Набрано баллов: <span style={{color: `var(--color-${rightAnswers >= quiz.questions.length / 2 ? "green" : "red"})`}}>{rightAnswers}</span> из {quiz.questions.length}</Score>
+              <Score>Набрано баллов: <span style={{color: `var(--color-${quizLogic.rightAnswers >= quiz.questions.length / 2 ? "green" : "red"})`}}>{quizLogic.rightAnswers}</span> из {quiz.questions.length}</Score>
               <Results>
                 <SubTitle>Верные ответы:</SubTitle>
                 <List>
                   {
                     quiz.questions.map((question, index) => {
-                      return <ResultCard key={index} question={question.question} myAnswer={question.answers.find((answer) => answer.myAnswer === true).answer} rightAnswer={question.answers.find((answer) => answer.isTrue === true).answer}/>
+                      return <ResultCard
+                        key={index}
+                        question={question.question}
+                        myAnswer={question.answers.find((answer) => answer.myAnswer === true).answer}
+                        rightAnswer={question.answers.find((answer) => answer.isTrue === true).answer}
+                      />
                     })
                   }
                 </List>
@@ -104,7 +99,8 @@ function GameResult ({quiz}) {
 }
 
 const mapStateToProps = (state) => ({
-  quiz: state.quiz.quiz
+  quiz: state.quiz.quiz,
+  quizLogic: state.quiz.quizLogic,
 });
 
 export default connect(mapStateToProps)(GameResult);

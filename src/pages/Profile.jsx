@@ -96,7 +96,7 @@ function Profile ({profile}) {
           : null
         }
         <Navigation>
-          <NavLink to="/">
+          <NavLink to="/myquizzes">
             <Button width="300px">Мои викторины</Button>
           </NavLink>
           <NavLink to="/profile/edit">
