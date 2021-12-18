@@ -56,17 +56,17 @@ function SignUp ({info, signUp}) {
         <Form title="Регистрация" onSubmit={signUpHandler}>
 
           <Input
-            name="name"
-            value={formData.name || ""}
-            type="text"
-            placeholder="Ваше имя"
-            onChange={onChangeHandler}
-          />
-          <Input
             name="username"
             value={formData.username || ""}
             type="text"
             placeholder="Имя пользователя"
+            onChange={onChangeHandler}
+          />
+          <Input
+            name="name"
+            value={formData.name || ""}
+            type="text"
+            placeholder="Ваше имя"
             onChange={onChangeHandler}
           />
           <Input

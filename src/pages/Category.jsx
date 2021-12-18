@@ -37,7 +37,7 @@ function Category ({categories, categoriesInfo, loadCategories, quizzes, foundQu
     }
 
     if(categories){
-      const category = categories.find(category => category.id === Number(id));
+      const category = categories.find(category => category.id === id);
       if(category){
         setSelectedCategory(category);
       } else{

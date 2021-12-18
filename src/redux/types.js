@@ -8,6 +8,11 @@ export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 export const SIGN_UP_LOADING = "SIGN_UP_LOADING";
 export const SIGN_UP_FAILING = "SIGN_UP_FAILING";
 
+// Log In
+export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
+export const LOG_IN_LOADING = "LOG_IN_LOADING";
+export const LOG_IN_FAILING = "LOG_IN_FAILING";
+
 // Log Out
 export const LOG_OUT = "LOG_OUT";
 
