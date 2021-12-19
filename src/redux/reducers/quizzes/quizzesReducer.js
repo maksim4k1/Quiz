@@ -23,7 +23,7 @@ const quizzesReducer = (state=initialState, {type, payload}) => {
       }
     } case LOAD_QUIZZES_FAILING: {
       return {
-        ...state,
+        ...initialState,
         quizzesState: stateCreator(FAILING, payload),
       }
     }

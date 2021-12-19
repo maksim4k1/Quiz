@@ -60,7 +60,7 @@ function Categories ({categories, foundCategories, info, loadCategories, findCat
               })
             }
           </CardList>
-          : <InfoText>Категории не найдены</InfoText>
+          : <InfoText>{info.error}</InfoText>
         }
       </Container>
     </Content>

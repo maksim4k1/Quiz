@@ -6,10 +6,14 @@ export function loadCategoriesAction(){
     dispatch({type: LOAD_CATEGORIES_LOADING});
 
     const response = await getData("/categories");
-    const data = await response.json();
+    const data = response.json ? await response.json() : "Error 500: Ошибка сервера";
 
     if(response.ok){
-      dispatch({type: LOAD_CATEGORIES_SUCCESS, payload: data});
+      if(data.length){
+        dispatch({type: LOAD_CATEGORIES_SUCCESS, payload: data});
+      } else{
+        dispatch({type: LOAD_CATEGORIES_FAILING, payload: "Категории не найдены"});
+      }
     } else{
       dispatch({type: LOAD_CATEGORIES_FAILING, payload: data});
     }

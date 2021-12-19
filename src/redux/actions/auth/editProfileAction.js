@@ -7,13 +7,11 @@ export function editProfileAction(formData, redirect){
       setTimeout(() => {
         if(!formData.username || !formData.name){
           dispatch({type: EDIT_PROFILE_FAILING, payload: "Заполните все поля"});
-        } else if(formData.username === "maksim4k1"){
-          dispatch({type: EDIT_PROFILE_FAILING, payload: "Пользователь с таким именем уже существует"});
         } else{
           redirect();
           dispatch({type: EDIT_PROFILE_SUCCESS, payload: formData});
         }
-      }, 500);
+      }, 200);
     } catch{
       dispatch({type: EDIT_PROFILE_FAILING, payload: "Error"});
     }

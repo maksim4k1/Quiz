@@ -12,7 +12,7 @@ export function signUpAction(formData, redirect){
       dispatch({type: SIGN_UP_FAILING, payload: "Пароли не совпадают"});
     } else{
       const response = await signUp(formData);
-      const data = await response.json();
+      const data = response.json ? await response.json() : "Error 500: Ошибка сервера";
 
       if(response.ok){
         setProfileData(data.token, data.data);

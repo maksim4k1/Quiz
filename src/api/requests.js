@@ -1,42 +1,67 @@
 const URL = "http://localhost:1717";
 
 export async function getData(url){
-  const response = await fetch(`${URL}${url}`);
+  try{
+    const response = await fetch(`${URL}${url}`);
 
-  return response;
+    return response;
+  } catch{
+    return {
+      ok: false
+    };
+  }
 }
 
 export async function signIn(data){
-  const response = await fetch(`${URL}/login`, {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  });
-  
-  return response;
+  try{
+    const response = await fetch(`${URL}/login`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    return response;
+  } catch{
+    return {
+      ok: false
+    };
+  }
 }
 
 export async function signUp(data){
-  const response = await fetch(`${URL}/signin`, {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  });
-  
-  return response;
+  try{
+    const response = await fetch(`${URL}/signin`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+    
+    return response;
+  }
+  catch{
+    return {
+      ok: false
+    };
+  }
 }
 
 export async function logIn(token){
-  const response = await fetch(`${URL}/me`, {
-    method: "GET",
-    headers: {
-      'X-Auth': token
-    }
-  });
-  
-  return response;
+  try{
+    const response = await fetch(`${URL}/me`, {
+      method: "GET",
+      headers: {
+        'X-Auth': token
+      }
+    });
+
+    return response;
+  } catch{
+    return {
+      ok: false
+    };
+  }
 }

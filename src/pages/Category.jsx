@@ -68,27 +68,25 @@ function Category ({categories, categoriesInfo, loadCategories, quizzes, foundQu
         {
           categoriesInfo.loading
           ? <InfoText>Подождите, идёт загрузка...</InfoText>
-          : <>
+          : quizzesInfo.loading
+          ? <InfoText>Подождите, идёт загрузка...</InfoText>
+          : foundQuizzes && foundQuizzes.length
+          ? <>
             <Description
               title={selectedCategory.title}
               onChange={onChangeHandler}
               value={searchValue}
               description={selectedCategory.description}
             />
-            {
-              quizzesInfo.loading
-              ? <InfoText>Подождите, идёт загрузка...</InfoText>
-              : foundQuizzes && foundQuizzes.length
-              ? <CardList>
-                {
-                  foundQuizzes.map(quiz => {
-                    return <Card key={quiz.id} title={quiz.title} description={quiz.description} link={`/quiz/${quiz.id}`} fill={randomColorGenerator()}/>
-                  })
-                }
-              </CardList>
-              : <InfoText>Викторины не найдены</InfoText>
-            }
+            <CardList>
+              {
+                foundQuizzes.map(quiz => {
+                  return <Card key={quiz.id} title={quiz.title} description={quiz.description} link={`/quiz/${quiz.id}`} fill={randomColorGenerator()}/>
+                })
+              }
+            </CardList>
           </>
+          : <InfoText>{categoriesInfo.error || quizzesInfo.error}</InfoText>
         }
       </Container>
     </Content>

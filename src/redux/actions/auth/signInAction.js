@@ -10,7 +10,7 @@ export function signInAction(formData, redirect){
       dispatch({type: SIGN_IN_FAILING, payload: "Заполните все поля"});
     } else{
       const response = await signIn(formData);
-      const data = await response.json();
+      const data = response.json ? await response.json() : "Error 500: Ошибка сервера";
 
       if(response.ok){
         setProfileData(data.token, data.data);

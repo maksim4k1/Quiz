@@ -22,7 +22,11 @@ const quizReducer = (state=initialState, {type, payload}) => {
       return {
         ...state,
         quizState: stateCreator(SUCCESS),
-        quiz: payload
+        quiz: payload,
+        quizLogic: {
+          ...state.quizLogic,
+          rightAnswers: 0
+        }
       }
     } case LOAD_QUIZ_LOADING: {
       return {
@@ -31,7 +35,7 @@ const quizReducer = (state=initialState, {type, payload}) => {
       }
     } case LOAD_QUIZ_FAILING: {
       return {
-        ...state,
+        ...initialState,
         quizState: stateCreator(FAILING, payload)
       }
     }

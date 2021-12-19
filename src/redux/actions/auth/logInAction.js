@@ -8,7 +8,7 @@ export function logInAction(){
 
     const token = getToken();
     const response = await logIn(token);
-    const data = await response.json();
+    const data = response.json ? await response.json() : "Error 500: Ошибка сервера";
 
     if(response.ok){
       setProfileData(token, data);

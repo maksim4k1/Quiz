@@ -9,7 +9,11 @@ export function loadQuizzesAction(id){
     const data = await response.json();
 
     if(response.ok){
-      dispatch({type: LOAD_QUIZZES_SUCCESS, payload: data});
+      if(data.length){
+        dispatch({type: LOAD_QUIZZES_SUCCESS, payload: data});
+      } else{
+        dispatch({type: LOAD_QUIZZES_FAILING, payload: "Викторины не найдены"});
+      }
     } else{
       dispatch({type: LOAD_QUIZZES_FAILING, payload: data});
     }

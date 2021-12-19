@@ -23,7 +23,7 @@ const categoriesReducer = (state=initialState, {type, payload}) => {
       }
     } case LOAD_CATEGORIES_FAILING: {
       return {
-        ...state,
+        ...initialState,
         categoriesState: stateCreator(FAILING, payload)
       }
     }
