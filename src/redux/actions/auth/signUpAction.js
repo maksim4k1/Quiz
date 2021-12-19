@@ -1,4 +1,4 @@
-import { signUp } from "../../../api/requests";
+import { signUp } from "../../../api/authRequests";
 import { setProfileData } from "../../../storage/localStorage";
 import { SIGN_UP_FAILING, SIGN_UP_LOADING, SIGN_UP_SUCCESS } from "../../types";
 

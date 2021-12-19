@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -7,6 +7,7 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import Button from "../components/UI/Buttons/Button";
 import LightButton from "../components/UI/Buttons/LightButton";
 import ResultCard from "../components/UI/Cards/ResultCard";
+import { updateScoreAction } from "../redux/actions/quiz/updateScoreAction";
 import { gap } from "../styles/mixins";
 
 const Content = styled.main`
@@ -46,14 +47,29 @@ const Buttons = styled.div`
   ${gap("30px")}
 `;
 
-function GameResult ({quiz, quizLogic}) {
+function GameResult ({quiz, quizLogic, profile, updateScore}) {
   const navigate = useNavigate();
+  const [result, setResult] = useState(null);
+  const [username] = useState(profile ? profile.username : "");
 
   useEffect(() => {
     if(!quiz){
       navigate("/error/404");
     }
-  }, [quiz, navigate]);
+    if(username && quizLogic && quiz){
+      setResult({
+        username: username,
+        score: quizLogic.rightAnswers,
+        quizId: quiz.id
+      });
+    }
+  }, [quiz, quizLogic, username, updateScore, navigate]);
+
+  useEffect(() => {
+    if(result){
+      updateScore(result);
+    }
+  }, [result, updateScore]);
 
   return(
     <Content>
@@ -101,6 +117,10 @@ function GameResult ({quiz, quizLogic}) {
 const mapStateToProps = (state) => ({
   quiz: state.quiz.quiz,
   quizLogic: state.quiz.quizLogic,
+  profile: state.auth.profile
 });
+const mapDispatchToProps = {
+  updateScore: updateScoreAction
+}
 
-export default connect(mapStateToProps)(GameResult);
+export default connect(mapStateToProps, mapDispatchToProps)(GameResult);

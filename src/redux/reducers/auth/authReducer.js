@@ -1,5 +1,5 @@
 import stateCreator from "../../../utils/stateCreator";
-import { EDIT_PROFILE_FAILING, EDIT_PROFILE_LOADING, EDIT_PROFILE_SUCCESS, FAILING, LOADING, LOG_IN_FAILING, LOG_IN_LOADING, LOG_IN_SUCCESS, LOG_OUT, SIGN_IN_FAILING, SIGN_IN_LOADING, SIGN_IN_SUCCESS, SIGN_UP_FAILING, SIGN_UP_LOADING, SIGN_UP_SUCCESS, SUCCESS } from "../../types";
+import { EDIT_PROFILE_FAILING, EDIT_PROFILE_LOADING, EDIT_PROFILE_SUCCESS, FAILING, LOADING, LOG_IN_FAILING, LOG_IN_LOADING, LOG_IN_SUCCESS, LOG_OUT, SIGN_IN_FAILING, SIGN_IN_LOADING, SIGN_IN_SUCCESS, SIGN_UP_FAILING, SIGN_UP_LOADING, SIGN_UP_SUCCESS, SUCCESS, UPDATE_SCORE } from "../../types";
 
 const initialState = {
   isAuth: false,
@@ -88,7 +88,13 @@ const authReducer = (state=initialState, {type, payload}) => {
         profileState: stateCreator(FAILING, payload),
       }
     }
-
+    // Upfate score
+    case UPDATE_SCORE: {
+      return {
+        ...state,
+        profile: payload,
+      }
+    }
     default: {
       return state;
     }

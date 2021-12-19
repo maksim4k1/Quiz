@@ -58,6 +58,9 @@ export const RIGHT_ANSWER = "RIGHT_ANSWER";
 // Set background color
 export const SET_BACKGROUND_COLOR = "SET_BACKGROUND_COLOR";
 
+// Update score
+export const UPDATE_SCORE = "UPDATE_SCORE";
+
 // Load rating
 export const LOAD_RATING_SUCCESS = "LOAD_RATING_SUCCESS";
 export const LOAD_RATING_LOADING = "LOAD_RATING_LOADING";

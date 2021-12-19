@@ -1,4 +1,4 @@
-import { logIn } from "../../../api/requests";
+import { logIn } from "../../../api/authRequests";
 import { getToken, setProfileData } from "../../../storage/localStorage";
 import { LOG_IN_FAILING, LOG_IN_LOADING, LOG_IN_SUCCESS } from "../../types";
 
