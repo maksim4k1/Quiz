@@ -51,8 +51,8 @@ function GameResult ({quiz, quizLogic, profile, updateScore}) {
   const [username] = useState(profile ? profile.username : "");
 
   useEffect(() => {
-    if(!quiz){
-      navigate("/error/404");
+    if(username && !quiz){
+      navigate("/error/404")
     }
     if(username && quizLogic && quiz){
       setResult({
