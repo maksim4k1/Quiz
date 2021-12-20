@@ -31,10 +31,8 @@ function Game ({quiz, quizLogic, quizInfo, loadQuiz, nextQuestion}) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if(!quiz || quiz.id !== id){
-      loadQuiz(id);
-    }
-  }, [quiz, id, loadQuiz]);
+    loadQuiz(id);
+  }, [id, loadQuiz]);
 
   function nextQuestionHandler(event){
     const buttonId = Number(event.target.id);

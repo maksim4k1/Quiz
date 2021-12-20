@@ -2,43 +2,38 @@ import React from "react";
 import styled from "styled-components";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import AppLink from "../../components/UI/AppLink";
-import { gap } from "../../styles/mixins";
 import Content from "../../components/Content";
 
-const Container = styled.div`
-  display: flex;
-  flex-flow: column;
-  ${gap("30px")}
-`;
-const Title = styled.h3`
-  font-size: 32px;
+const ErrorTitle = styled.h1`
+  font-size: 48px;
   font-weight: 600;
-  text-align: center;
 `;
-const Info = styled.p`
-  color: var(--color-text-gray);
-  text-align: center;
+const ErrorText = styled.p`
+  margin: 20px 0 30px;
+  font-size: 18px;
+  &>strong{
+    font-weight: 600;
+  }
 `;
-const Links = styled.div`
-  display: flex;
-  justify-content: center;
-  ${gap("40px")};
+const Redirect = styled.div`
+  font-size: 18px;
+  &>a{
+    font-weight: 600;
+    font-size: inherit;
+  }
 `;
 
 function AuthError () {
   return(
     <Content>
-      <Container className="small_container">
+      <div className="small_container">
         <Breadcrumbs road={[
           {title: "Страница недоступна"}
         ]}/>
-        <Title>Эта страница недоступна</Title>
-        <Info>Чтобы перейти на эту страницу следует авторизоваться</Info>
-        <Links>
-          <AppLink to="/signin">Авторизация</AppLink>
-          <AppLink to="/signup">Регистрация</AppLink>
-        </Links>
-      </Container>
+        <ErrorTitle>Эта страница недоступна</ErrorTitle>
+        <ErrorText>Ошибка: вы не вошли в аккаунт</ErrorText>
+        <Redirect>Для того чтобы перейти на эту страницу нужно <AppLink to="/signin">Авторизоваться</AppLink></Redirect>
+      </div>
     </Content>
   );
 }
