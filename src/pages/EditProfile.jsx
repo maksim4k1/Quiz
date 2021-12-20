@@ -77,7 +77,7 @@ function EditProfile ({profile, info, editProfile}) {
   function editProfileHandler(event){
     event.preventDefault();
 
-    editProfile(formData, () => {
+    editProfile({...formData, username: profile.username}, () => {
       navigate("/profile");
     })
   }
@@ -114,14 +114,8 @@ function EditProfile ({profile, info, editProfile}) {
               : <CameraIcon width="75"/>
             }
           </ImageInputContainer>
+          <LightButton width="250px" onClick={() => setFormData((data) => ({...data, image: ""}))} type="button">Удалить фотографию</LightButton>
 
-          <Input
-            name="username"
-            value={formData.username || ""}
-            type="text"
-            placeholder="Имя пользователя"
-            onChange={onChangeHandler}
-          />
           <Input
             name="name"
             value={formData.name || ""}

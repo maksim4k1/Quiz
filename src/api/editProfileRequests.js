@@ -1,15 +1,11 @@
-import { getToken } from "../storage/localStorage";
 import URL from "./requests";
 
 export async function editProfileData(data){
-  try{
-    const token = getToken();
-    
+  try{    
     const response = await fetch(`${URL}/me/edit`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json',
-        'X-Auth': token
       },
       body: JSON.stringify(data)
     });

@@ -5,7 +5,7 @@ export function editProfileAction(formData, redirect){
   return async (dispatch) => {
     dispatch({type: EDIT_PROFILE_LOADING});
 
-    if(!formData.username || !formData.name){
+    if(!formData.name){
       dispatch({type: EDIT_PROFILE_FAILING, payload: "Заполните все поля"});
     } else{
       const response = await editProfileData(formData);
