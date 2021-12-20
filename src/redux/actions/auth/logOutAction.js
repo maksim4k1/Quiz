@@ -1,7 +1,7 @@
-import { deleteProfileData } from "../../../storage/localStorage";
+import { deleteToken } from "../../../storage/localStorage";
 import { LOG_OUT } from "../../types";
 
 export function logOutAction(){
-  deleteProfileData();
+  deleteToken();
   return {type: LOG_OUT};
 }

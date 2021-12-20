@@ -18,10 +18,10 @@ const Top = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
 `;
 const Place = styled.div`
-  height: 330px;
   display: flex;
   flex-flow: column;
-  ${gap("10px")}
+  position: relative;
+  ${gap("5px")}
   align-items: center;
   justify-content: flex-end;
   &::after{
@@ -38,21 +38,21 @@ const Place = styled.div`
 const FirstPlase = styled(Place)`
   &::after{
     content: "1";
-    height: 210px;
+    height: 190px;
     background: var(--color-red);
   }
 `;
 const SecondPlase = styled(Place)`
   &::after{
     content: "2";
-    height: 160px;
+    height: 140px;
     background: var(--color-blue);
   }
 `;
 const ThirdPlase = styled(Place)`
   &::after{
     content: "3";
-    height: 130px;
+    height: 120px;
     background: var(--color-yellow);
   }
 `;
@@ -61,13 +61,18 @@ const Image = styled.img`
   max-height: 80px;
   min-width: 80px;
   min-height: 80px;
+  margin: 0 0 5px;
   border: none;
   border-radius: 50%;
-  background: var(--color-darkblue);
   object-fit: cover;
 `;
 const Username = styled.h5`
   font-size: 20px;
+`;
+const Score = styled.div`
+  &>span{
+    color: var(--color-red);
+  }
 `;
 const InfoText = styled.div`
   color: var(--color-text-gray);
@@ -78,10 +83,8 @@ const InfoText = styled.div`
 
 function Rating ({rating, info, loadRating}) {
   useEffect(() => {
-    if(!rating){
-      loadRating();
-    }
-  }, [loadRating, rating]);
+    loadRating();
+  }, [loadRating]);
 
   return(
     <Content>
@@ -98,21 +101,24 @@ function Rating ({rating, info, loadRating}) {
               <SecondPlase>
                 <Image src={rating[1].image || user}/>
                 <Username>{rating[1].username}</Username>
+                <Score>Score: <span>{rating[1].score}</span></Score>
               </SecondPlase>
               <FirstPlase>
                 <Image src={rating[0].image || user}/>
                 <Username>{rating[0].username}</Username>
+                <Score>Score: <span>{rating[0].score}</span></Score>
               </FirstPlase>
               <ThirdPlase>
                 <Image src={rating[2].image || user}/>
                 <Username>{rating[2].username}</Username>
+                <Score>Score: <span>{rating[2].score}</span></Score>
               </ThirdPlase>
             </Top>
             <UsersList>
               {
                 rating.map((user) => {
                   if(user.place > 3){
-                    return <UserCard key={user.place} image={user.image} username={`${user.place}. ${user.username}`}/>
+                    return <UserCard key={user.place} image={user.image} username={`${user.place}. ${user.username}`} score={String(user.score)}/>
                   }
                   return null
                 })

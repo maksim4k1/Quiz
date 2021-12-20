@@ -1,5 +1,5 @@
 import { signUp } from "../../../api/authRequests";
-import { setProfileData } from "../../../storage/localStorage";
+import { setToken } from "../../../storage/localStorage";
 import { SIGN_UP_FAILING, SIGN_UP_LOADING, SIGN_UP_SUCCESS } from "../../types";
 
 export function signUpAction(formData, redirect){
@@ -15,7 +15,7 @@ export function signUpAction(formData, redirect){
       const data = response.json ? await response.json() : "Error 500: Ошибка сервера";
 
       if(response.ok){
-        setProfileData(data.token, data.data);
+        setToken(data.token);
         redirect();
         dispatch({type: SIGN_UP_SUCCESS, payload: data.data});
       } else{

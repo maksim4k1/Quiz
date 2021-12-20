@@ -20,7 +20,6 @@ const Image = styled.img`
   min-height: 35px;
   border: none;
   border-radius: 50%;
-  background: var(--color-darkblue);
   object-fit: cover;
 `;
 const Username = styled.h6`
@@ -28,7 +27,9 @@ const Username = styled.h6`
 `;
 const Score = styled.div`
   margin: 0 0 0 auto;
-  font-size: 18px;
+  &>span{
+    color: var(--color-red);
+  }
 `;
 
 function UserCard ({username, image, score}) {
@@ -38,7 +39,7 @@ function UserCard ({username, image, score}) {
       <Username>{username}</Username>
       {
         score
-        ? <Score>Баллы: <span>{score}</span></Score>
+        ? <Score>Score: <span>{score}</span></Score>
         : null
       }
     </CardElement>
