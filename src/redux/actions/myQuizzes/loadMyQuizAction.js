@@ -5,7 +5,7 @@ export function loadMyQuizAction(id){
   return async (dispatch) => {
     dispatch({type: LOAD_MY_QUIZ_LOADING});
 
-    const response = await getData(`/quiz/${id}`);
+    const response = await getData(`/myquiz/${id}`);
     const data = response.json ? await response.json() : "Error 500: Ошибка сервера";
 
     if(response.ok){
