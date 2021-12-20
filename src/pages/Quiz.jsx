@@ -75,7 +75,7 @@ function Quiz ({quiz, quizInfo, loadQuiz, categories, categoriesInfo, loadCatego
               <p>Категория: <strong>{category}</strong></p>
               <p>Автор: <strong>{quiz.author}</strong></p>
             </Info>
-            <NavLink to={`/quiz/game/${id}`}><Button>Пройти</Button></NavLink>
+            <NavLink to={`/game/${id}`}><Button>Пройти</Button></NavLink>
           </>
           : null
         }
