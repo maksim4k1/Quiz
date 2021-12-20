@@ -17,3 +17,21 @@ export function getMyQuizzes(data){
     }
   }
 }
+
+export function getMyQuiz(data){
+  try{
+    const response = fetch(`${URL}/myquiz/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    return response;
+  } catch{
+    return {
+      ok: false
+    }
+  }
+}

@@ -32,14 +32,14 @@ const Score = styled.div`
   }
 `;
 
-function UserCard ({username, image, score}) {
+function UserCard ({username, image, score, scoreFill}) {
   return(
     <CardElement>
       <Image src={image || user}/>
       <Username>{username}</Username>
       {
         score
-        ? <Score>Score: <span>{score}</span></Score>
+        ? <Score>Score: <span style={scoreFill ? {color: scoreFill} : null}>{score}</span></Score>
         : null
       }
     </CardElement>
