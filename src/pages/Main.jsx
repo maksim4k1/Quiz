@@ -3,10 +3,8 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/UI/Buttons/Button";
 import background_image from "../assets/images/background.png";
+import Content from "../components/Content";
 
-const Content = styled.main`
-  margin: 100px 0 150px;
-`;
 const Container = styled.div`
   position: relative;
   &::before{

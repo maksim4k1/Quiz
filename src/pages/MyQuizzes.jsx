@@ -1,14 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Description from "../components/Description";
 import Card from "../components/UI/Cards/Card";
 import CardList from "../components/UI/Lists/CardList";
 import randomColorGenerator from "../utils/randomColorGenerator";
-
-const Content = styled.main`
-  margin: 100px 0 150px;
-`;
+import Content from "../components/Content";
 
 function MyQuizzes () {
   return(

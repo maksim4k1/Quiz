@@ -9,10 +9,8 @@ import LightButton from "../components/UI/Buttons/LightButton";
 import ResultCard from "../components/UI/Cards/ResultCard";
 import { updateScoreAction } from "../redux/actions/quiz/updateScoreAction";
 import { gap } from "../styles/mixins";
+import Content from "../components/Content";
 
-const Content = styled.main`
-  margin: 100px 0 150px;
-`;
 const Container = styled.div`
   display: flex;
   flex-flow: column;

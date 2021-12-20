@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import Breadcrumbs from "../components/Breadcrumbs";
+import Content from "../components/Content";
+import InfoText from "../components/InfoText";
 import Description from "../components/Description";
 import Card from "../components/UI/Cards/Card";
 import CardList from "../components/UI/Lists/CardList";
@@ -9,18 +11,9 @@ import { findCategoryAction } from "../redux/actions/categories/findCategoryActi
 import { loadCategoriesAction } from "../redux/actions/categories/loadCategoriesAction";
 import randomColorGenerator from "../utils/randomColorGenerator";
 
-const Content = styled.main`
-  margin: 100px 0 150px;
-`;
 const Container = styled.div`
   display: flex;
   flex-flow: column;
-`;
-const InfoText = styled.div`
-  color: var(--color-text-gray);
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
 `;
 
 function Categories ({categories, foundCategories, info, loadCategories, findCategory}) {

@@ -10,19 +10,12 @@ import { loadCategoriesAction } from "../redux/actions/categories/loadCategories
 import { findQuizAction } from "../redux/actions/quizzes/findQuizAction";
 import { loadQuizzesAction } from "../redux/actions/quizzes/loadQuizzesAction";
 import randomColorGenerator from "../utils/randomColorGenerator";
+import Content from "../components/Content";
+import InfoText from "../components/InfoText";
 
-const Content = styled.main`
-  margin: 100px 0 150px;
-`;
 const Container = styled.div`
   display: flex;
   flex-flow: column;
-`;
-const InfoText = styled.div`
-  color: var(--color-text-gray);
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
 `;
 
 function Category ({categories, categoriesInfo, loadCategories, quizzes, foundQuizzes, findQuiz, quizzesInfo, loadQuizzes}) {

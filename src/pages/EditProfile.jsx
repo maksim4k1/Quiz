@@ -12,10 +12,8 @@ import { gap } from "../styles/mixins";
 import { editProfileAction } from "../redux/actions/auth/editProfileAction";
 import CameraIcon from "../assets/icons/CameraIcon";
 import Breadcrumbs from "../components/Breadcrumbs";
+import Content from "../components/Content";
 
-const Content = styled.main`
-  margin: 100px 0 150px;
-`;
 const ImageInputContainer = styled.div`
   width: 250px;
   height: 250px;

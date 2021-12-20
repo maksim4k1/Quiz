@@ -7,10 +7,8 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import Button from "../components/UI/Buttons/Button";
 import LightButton from "../components/UI/Buttons/LightButton";
 import { gap } from "../styles/mixins";
+import Content from "../components/Content";
 
-const Content = styled.main`
-  margin: 100px 0 150px;
-`;
 const Container = styled.div`
   display: flex;
   flex-flow: column;

@@ -8,10 +8,8 @@ import Button from "../components/UI/Buttons/Button";
 import Form from "../components/UI/Form";
 import Input from "../components/UI/Input";
 import { signInAction } from "../redux/actions/auth/signInAction";
+import Content from "../components/Content";
 
-const Content = styled.main`
-  margin: 100px 0 150px;
-`;
 const RedirectLink = styled.div`
   color: var(--color-gray);
   font-size: 14px;

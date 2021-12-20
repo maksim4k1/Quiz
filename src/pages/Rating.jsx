@@ -8,10 +8,9 @@ import user from "../assets/images/user.png";
 import { connect } from "react-redux";
 import { loadRatingAction } from "../redux/actions/rating/loadRatingAction";
 import { useEffect } from "react";
+import Content from "../components/Content";
+import InfoText from "../components/InfoText";
 
-const Content = styled.main`
-  margin: 100px 0 150px;
-`;
 const Top = styled.div`
   margin: 0 0 40px;
   display: grid;
@@ -73,12 +72,6 @@ const Score = styled.div`
   &>span{
     color: var(--color-red);
   }
-`;
-const InfoText = styled.div`
-  color: var(--color-text-gray);
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
 `;
 
 function Rating ({rating, info, loadRating}) {

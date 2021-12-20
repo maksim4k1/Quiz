@@ -3,10 +3,8 @@ import styled from "styled-components";
 import Breadcrumbs from "../../components/Breadcrumbs";
 import AppLink from "../../components/UI/AppLink";
 import { gap } from "../../styles/mixins";
+import Content from "../../components/Content";
 
-const Content = styled.main`
-  margin: 100px 0 150px;
-`;
 const Container = styled.div`
   display: flex;
   flex-flow: column;

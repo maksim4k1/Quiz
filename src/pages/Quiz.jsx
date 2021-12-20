@@ -11,10 +11,9 @@ import Button from "../components/UI/Buttons/Button";
 import { loadCategoriesAction } from "../redux/actions/categories/loadCategoriesAction";
 import { loadQuizAction } from "../redux/actions/quiz/loadQuizAction";
 import { gap } from "../styles/mixins";
+import Content from "../components/Content";
+import InfoText from "../components/InfoText";
 
-const Content = styled.main`
-  margin: 100px 0 150px;
-`;
 const Info = styled.ul`
   margin: 40px 0 80px;
   display: grid;
@@ -26,12 +25,6 @@ const Info = styled.ul`
     font-weight: 600;
     margin: 0 0 0 10px;
   }
-`;
-const InfoText = styled.div`
-  color: var(--color-text-gray);
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
 `;
 
 function Quiz ({quiz, quizInfo, loadQuiz, categories, categoriesInfo, loadCategories}) {

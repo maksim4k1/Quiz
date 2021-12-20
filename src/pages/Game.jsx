@@ -7,10 +7,8 @@ import AnswerCard from "../components/UI/Cards/AnswerCard";
 import { loadQuizAction } from "../redux/actions/quiz/loadQuizAction";
 import { nextQuestionAction } from "../redux/actions/quiz/nextQuestionAction";
 import { gap } from "../styles/mixins";
+import Content from "../components/Content";
 
-const Content = styled.main`
-  margin: 100px 0 150px;
-`;
 const Title = styled.h5`
   font-size: 36px;
   font-weight: 600;
