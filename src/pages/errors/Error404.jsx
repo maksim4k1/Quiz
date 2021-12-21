@@ -16,7 +16,6 @@ const ErrorText = styled.p`
   }
 `;
 const Redirect = styled.div`
-  font-size: 18px;
   &>a{
     font-weight: 600;
     font-size: inherit;
@@ -32,7 +31,7 @@ function Error404 () {
         ]}/>
         <ErrorTitle>Ошибка 404</ErrorTitle>
         <ErrorText><strong>Ошибка:</strong> cтраница не найдена.</ErrorText>
-        <Redirect>Вернуться на <AppLink to="/">главную</AppLink> страницу.</Redirect>
+        <Redirect>Вернуться на <AppLink to="/">Главную</AppLink> страницу.</Redirect>
       </div>
     </Content>
   );

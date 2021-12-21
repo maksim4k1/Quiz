@@ -16,7 +16,6 @@ const ErrorText = styled.p`
   }
 `;
 const Redirect = styled.div`
-  font-size: 18px;
   &>a{
     font-weight: 600;
     font-size: inherit;
@@ -30,8 +29,8 @@ function AuthError () {
         <Breadcrumbs road={[
           {title: "Страница недоступна"}
         ]}/>
-        <ErrorTitle>Эта страница недоступна</ErrorTitle>
-        <ErrorText>Ошибка: вы не вошли в аккаунт</ErrorText>
+        <ErrorTitle>Страница недоступна</ErrorTitle>
+        <ErrorText><strong>Ошибка:</strong> вы не вошли в аккаунт</ErrorText>
         <Redirect>Для того чтобы перейти на эту страницу нужно <AppLink to="/signin">Авторизоваться</AppLink></Redirect>
       </div>
     </Content>
