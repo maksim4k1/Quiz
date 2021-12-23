@@ -10,6 +10,7 @@ import { loadRatingAction } from "../redux/actions/rating/loadRatingAction";
 import { useEffect } from "react";
 import Content from "../components/Content";
 import InfoText from "../components/InfoText";
+import { NavLink } from "react-router-dom";
 
 const Top = styled.div`
   margin: 0 0 40px;
@@ -73,6 +74,12 @@ const Score = styled.div`
     color: var(--color-red);
   }
 `;
+const Link = styled(NavLink)`
+  color: var(--color-black);
+  &:hover {
+    color: var(--color-darkblue);
+  }
+`;
 
 function Rating ({rating, info, loadRating}) {
   useEffect(() => {
@@ -93,17 +100,17 @@ function Rating ({rating, info, loadRating}) {
             <Top>
               <SecondPlase>
                 <Image src={rating[1].image || user}/>
-                <Username>{rating[1].username}</Username>
+                <Username><Link to={`/profile/${rating[1].username}`}>{rating[1].username}</Link></Username>
                 <Score>Score: <span>{rating[1].score}</span></Score>
               </SecondPlase>
               <FirstPlase>
                 <Image src={rating[0].image || user}/>
-                <Username>{rating[0].username}</Username>
+                <Username><Link to={`/profile/${rating[0].username}`}>{rating[0].username}</Link></Username>
                 <Score>Score: <span>{rating[0].score}</span></Score>
               </FirstPlase>
               <ThirdPlase>
                 <Image src={rating[2].image || user}/>
-                <Username>{rating[2].username}</Username>
+                <Username><Link to={`/profile/${rating[2].username}`}>{rating[2].username}</Link></Username>
                 <Score>Score: <span>{rating[2].score}</span></Score>
               </ThirdPlase>
             </Top>
@@ -111,7 +118,7 @@ function Rating ({rating, info, loadRating}) {
               {
                 rating.map((user) => {
                   if(user.place > 3){
-                    return <UserCard key={user.place} image={user.image} username={`${user.place}. ${user.username}`} score={String(user.score)}/>
+                    return <UserCard key={user.place} image={user.image} place={user.place} username={user.username} score={String(user.score)}/>
                   }
                   return null
                 })

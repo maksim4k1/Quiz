@@ -63,7 +63,8 @@ function MyQuiz ({quiz, info, profile, loadQuiz}) {
                   return <UserCard
                   key={index}
                   image={result.image}
-                  username={`${index + 1}. ${result.username}`}
+                  place={index + 1}
+                  username={result.username}
                   scoreFill={(quiz.maxScore / result.result) <= (quiz.maxScore / 2) ? "var(--color-green)" : "var(--color-red)"}
                   score={`${result.result} / ${quiz.maxScore}`}/>
                 })

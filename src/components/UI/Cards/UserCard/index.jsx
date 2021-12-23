@@ -2,16 +2,23 @@ import React from "react";
 import styled from "styled-components";
 import { gap } from "../../../../styles/mixins";
 import user from "../../../../assets/images/user.png";
+import { NavLink } from "react-router-dom";
 
-const CardElement = styled.div`
+const CardElement = styled(NavLink)`
   width: 100%;
   heihgt: 55px;
   padding: 10px 22px;
   display: flex;
   align-items: center;
   ${gap("15px")}
+  color: var(--color-black);
   border: 1px solid var(--color-gray);
   border-radius: 15px;
+  background: var(--color-white);
+  transition: all 0.3s;
+  &:hover {
+    background: var(--color-gray);
+  }
 `;
 const Image = styled.img`
   max-width: 35px;
@@ -32,16 +39,16 @@ const Score = styled.div`
   }
 `;
 
-function UserCard ({username, image, score, scoreFill}) {
+function UserCard ({place, username, image, score, scoreFill}) {
   return(
-    <CardElement>
-      <Image src={image || user}/>
-      <Username>{username}</Username>
-      {
-        score
-        ? <Score>Score: <span style={scoreFill ? {color: scoreFill} : null}>{score}</span></Score>
-        : null
-      }
+    <CardElement to={`/profile/${username}`}>
+        <Image src={image || user}/>
+        <Username>{place}. {username}</Username>
+        {
+          score
+          ? <Score>Score: <span style={scoreFill ? {color: scoreFill} : null}>{score}</span></Score>
+          : null
+        }
     </CardElement>
   );
 }
