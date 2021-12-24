@@ -17,7 +17,7 @@ const InputElement = styled.input`
 
 function Input (props) {
   return(
-    <InputElement {...props} style={props.width ? {width: props.width} : {}} />
+    <InputElement style={props.width ? {width: props.width} : {}} {...props} />
   );
 }
 

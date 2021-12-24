@@ -1,3 +1,4 @@
+import CreateQuiz from "../pages/CreateQuiz";
 import EditProfile from "../pages/EditProfile";
 import Game from "../pages/Game";
 import GameResult from "../pages/GameResult";
@@ -12,6 +13,7 @@ const privateRoutes = [
   {path: "/myquiz/:id", element: <MyQuiz/>, exact: true},
   {path: "/game/:id", element: <Game/>, exact: true},
   {path: "/game/result", element: <GameResult/>, exact: true},
+  {path: "/myquizzes/create", element: <CreateQuiz/>, exact: true},
 ];
 
 export default privateRoutes;
