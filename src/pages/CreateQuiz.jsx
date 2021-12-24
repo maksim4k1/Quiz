@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Content from "../components/Content";
@@ -11,6 +12,7 @@ import Form from "../components/UI/Form";
 import Input from "../components/UI/Input";
 import Switch from "../components/UI/Select";
 import TextArea from "../components/UI/TextArea";
+import { loadCategoriesAction } from "../redux/actions/categories/loadCategoriesAction";
 import { gap } from "../styles/mixins";
 
 const SubTitle = styled.h5`
@@ -25,8 +27,8 @@ const Buttons = styled.div`
   ${gap("25px")}
 `;
 
-function CreateQuiz () {
-  const [formData, setFormData] = useState({questions: []});
+function CreateQuiz ({categories, categoriesInfo, profile, loadCategories}) {
+  const [formData, setFormData] = useState({author: profile ? profile.username : "", questions: []});
   const [questionsCount, setQuestionsCount] = useState(0);
   const [questions, setQuestions] = useState([]);
 
@@ -37,6 +39,12 @@ function CreateQuiz () {
     }
     setQuestions(newQuestions);
   }, [questionsCount]);
+  
+  useEffect(() => {
+    if(!categories){
+      loadCategories();
+    }
+  }, [categories, loadCategories]);
 
   function onChangeHandler(event){
     setFormData((data) => ({
@@ -66,10 +74,8 @@ function CreateQuiz () {
             onChange={onChangeHandler}
           />
           <Switch
-            placeholder="Категория"
-            options={[
-              {title: "Математика", value: 0}
-            ]}
+            placeholder={categoriesInfo.loading ? "Загрузка..." : "Категория"}
+            options={categories ? categories.map((category) => ({title: category.title, value: category.id})) : []}
             name="category"
             onChange={onChangeHandler}
           />
@@ -95,4 +101,13 @@ function CreateQuiz () {
   );
 }
 
-export default CreateQuiz;
+const mapStateToProps = (state) => ({
+  categories: state.categories.categories,
+  categoriesInfo: state.categories.categoriesState,
+  profile: state.auth.profile,
+});
+const mapDispatchToProps = {
+  loadCategories: loadCategoriesAction
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateQuiz);
