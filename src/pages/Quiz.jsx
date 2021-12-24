@@ -59,11 +59,8 @@ function Quiz ({quiz, quizInfo, loadQuiz, categories, categoriesInfo, loadCatego
         {
           quizInfo.loading || categoriesInfo.loading
           ? null
-          : quizInfo.error
-          ? <InfoText>{quizInfo.error}</InfoText>
           : quiz
           ? <>
-            
             <Description
               title={quiz.name}
               description={quiz.description}
@@ -77,7 +74,7 @@ function Quiz ({quiz, quizInfo, loadQuiz, categories, categoriesInfo, loadCatego
             </Info>
             <NavLink to={`/game/${id}`}><Button>Пройти</Button></NavLink>
           </>
-          : null
+          : <InfoText>{quizInfo.error}</InfoText>
         }
       </div>
     </Content>

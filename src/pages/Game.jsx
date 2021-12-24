@@ -8,6 +8,7 @@ import { loadQuizAction } from "../redux/actions/quiz/loadQuizAction";
 import { nextQuestionAction } from "../redux/actions/quiz/nextQuestionAction";
 import { gap } from "../styles/mixins";
 import Content from "../components/Content";
+import InfoText from "../components/InfoText";
 
 const Title = styled.h5`
   font-size: 36px;
@@ -49,7 +50,7 @@ function Game ({quiz, quizLogic, quizInfo, loadQuiz, nextQuestion}) {
       <div className="small_container">
         {
           quizInfo.loading
-          ? <div>Загрузка</div>
+          ? <InfoText>Загрузка</InfoText>
           : quiz
           ? <>
             <Title>{quiz.name}</Title>
@@ -73,7 +74,7 @@ function Game ({quiz, quizLogic, quizInfo, loadQuiz, nextQuestion}) {
               }
             </Answers>
           </>
-          : <div>{quizInfo.error}</div>
+          : <InfoText>{quizInfo.error}</InfoText>
         }
       </div>
     </Content>

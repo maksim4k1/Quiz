@@ -31,7 +31,8 @@ const quizReducer = (state=initialState, {type, payload}) => {
     } case LOAD_QUIZ_LOADING: {
       return {
         ...state,
-        quizState: stateCreator(LOADING)
+        quizState: stateCreator(LOADING),
+        quiz: null
       }
     } case LOAD_QUIZ_FAILING: {
       return {
