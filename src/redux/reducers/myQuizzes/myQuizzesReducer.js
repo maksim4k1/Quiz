@@ -1,5 +1,5 @@
 import stateCreator from "../../../utils/stateCreator";
-import { CREATE_QUIZ_FAILING, CREATE_QUIZ_LOADING, CREATE_QUIZ_SUCCESS, FAILING, LOADING, LOAD_MY_QUIZZES_FAILING, LOAD_MY_QUIZZES_LOADING, LOAD_MY_QUIZZES_SUCCESS, LOAD_MY_QUIZ_FAILING, LOAD_MY_QUIZ_LOADING, LOAD_MY_QUIZ_SUCCESS, SUCCESS } from "../../types";
+import { CREATE_QUIZ_FAILING, CREATE_QUIZ_LOADING, CREATE_QUIZ_SUCCESS, DELETE_QUIZ_FAILING, DELETE_QUIZ_LOADING, DELETE_QUIZ_SUCCESS, FAILING, LOADING, LOAD_MY_QUIZZES_FAILING, LOAD_MY_QUIZZES_LOADING, LOAD_MY_QUIZZES_SUCCESS, LOAD_MY_QUIZ_FAILING, LOAD_MY_QUIZ_LOADING, LOAD_MY_QUIZ_SUCCESS, SUCCESS } from "../../types";
 
 const initialState = {
   quizzes: null,
@@ -7,6 +7,7 @@ const initialState = {
   quizzesState: stateCreator(),
   quizState: stateCreator(),
   createQuizState: stateCreator(),
+  deleteQuizState: stateCreator(),
 }
 
 const myQuizzesReducer = (state=initialState, {type, payload}) => {
@@ -64,6 +65,23 @@ const myQuizzesReducer = (state=initialState, {type, payload}) => {
       return{
         ...state,
         createQuizState: stateCreator(FAILING, payload),
+      }
+    }
+    // Delete quiz
+    case DELETE_QUIZ_SUCCESS: {
+      return{
+        ...state,
+        deleteQuizState: stateCreator(SUCCESS),
+      }
+    } case DELETE_QUIZ_LOADING: {
+      return{
+        ...state,
+        deleteQuizState: stateCreator(LOADING),
+      }
+    } case DELETE_QUIZ_FAILING: {
+      return{
+        ...state,
+        deleteQuizState: stateCreator(FAILING, payload),
       }
     }
     default: {

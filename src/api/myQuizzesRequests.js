@@ -53,3 +53,17 @@ export async function createNewQuiz(data){
     }
   }
 }
+
+export async function deleteMyQuiz(id){
+  try{
+    const response = await fetch(`${URL}/myquiz/delete/${id}`, {
+      method: "DELETE"
+    });
+  
+    return response;
+  } catch{
+    return {
+      ok: false
+    }
+  }
+}

@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { connect } from "react-redux";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Content from "../components/Content";
@@ -11,6 +11,7 @@ import Button from "../components/UI/Buttons/Button";
 import LightButton from "../components/UI/Buttons/LightButton";
 import UserCard from "../components/UI/Cards/UserCard";
 import UsersList from "../components/UI/Lists/UsersList";
+import { deleteMyQuizAction } from "../redux/actions/myQuizzes/deleteMyQuizAction";
 import { loadMyQuizAction } from "../redux/actions/myQuizzes/loadMyQuizAction";
 import { gap } from "../styles/mixins";
 
@@ -34,13 +35,21 @@ const Buttons = styled.div`
   ${gap("25px")}
 `;
 
-function MyQuiz ({quiz, info, profile, loadQuiz}) {
+function MyQuiz ({quiz, info, profile, loadQuiz, deleteQuiz}) {
   const {id} = useParams();
+  const navigate = useNavigate();
   const [username] = useState(profile ? profile.username : "");
 
   useEffect(() => {
     loadQuiz(id, username);
   }, [id, username, loadQuiz]);
+
+  function deleteQuizHandler(){
+    const isDelete = window.confirm("Вы уверены что хотите удалить эту викторину?");
+    if(isDelete){
+      deleteQuiz(id, () => navigate("/myquizzes"));
+    }
+  }
 
   return(
     <Content>
@@ -72,7 +81,7 @@ function MyQuiz ({quiz, info, profile, loadQuiz}) {
             </UsersList>
             <Buttons>
               <NavLink to={`/quiz/${id}`}><Button>Викторина</Button></NavLink>
-              <LightButton>Удалить</LightButton>
+              <LightButton onClick={deleteQuizHandler}>Удалить</LightButton>
             </Buttons>
           </Info>
         : <InfoText>{info.error}</InfoText>
@@ -88,7 +97,8 @@ const mapStateToProps = (state) => ({
   profile: state.auth.profile,
 });
 const mapDispatchToProps = {
-  loadQuiz: loadMyQuizAction
+  loadQuiz: loadMyQuizAction,
+  deleteQuiz: deleteMyQuizAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyQuiz);

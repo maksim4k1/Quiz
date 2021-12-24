@@ -33,14 +33,12 @@ export function createQuizAction(formData, redirect){
       }
     }
 
-    console.log(formData)
     const response = await createNewQuiz(formData);
     const data = response.json ? await response.json() : "Error 500: Ошибка на сервере";
     
     if(response.ok){
       dispatch({type: CREATE_QUIZ_SUCCESS});
       dispatch(logInAction());
-      console.log(data)
       redirect();
     } else{
       dispatch({type: CREATE_QUIZ_FAILING, payload: data});
