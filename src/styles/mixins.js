@@ -10,3 +10,14 @@ export const gap = (gapX, gapY=gapX) => `
   -moz-row-gap: ${gapY};
   -ms-row-gap: ${gapY};
 `;
+export const max_lines = (lines) => `
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: ${lines};
+  -webkit-box-orient: vertical;
+  line-clamp: ${lines};
+  box-orient: vertical;
+`;
