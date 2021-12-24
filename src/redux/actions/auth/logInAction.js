@@ -7,12 +7,16 @@ export function logInAction(){
     dispatch({type: LOG_IN_LOADING});
 
     const token = getToken();
-    const response = await logIn(token);
-    const data = response.json ? await response.json() : "Error 500: Ошибка сервера";
+    if(token){
+      const response = await logIn(token);
+      const data = response.json ? await response.json() : "Error 500: Ошибка сервера";
 
-    if(response.ok){
-      setToken(token);
-      dispatch({type: LOG_IN_SUCCESS, payload: data});
+      if(response.ok){
+        setToken(token);
+        dispatch({type: LOG_IN_SUCCESS, payload: data});
+      } else{
+        dispatch({type: LOG_IN_FAILING});
+      }
     } else{
       dispatch({type: LOG_IN_FAILING});
     }

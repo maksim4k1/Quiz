@@ -4,8 +4,11 @@ export function createQuizAction(formData){
   return async (dispatch) => {
     dispatch({type: CREATE_QUIZ_LOADING});
 
-    if(!formData.name || !formData.category || formData.questions.find(question => !question.question) || formData.questions.find(question => question.answers.find(answer => !answer.answer))){
+    if(!formData.name || formData.questions.find(question => !question.question) || formData.questions.find(question => question.answers.find(answer => !answer.answer))){
       dispatch({type: CREATE_QUIZ_FAILING, payload: "Заполните все поля"});
+      return;
+    } else if(!formData.category){
+      dispatch({type: CREATE_QUIZ_FAILING, payload: "Выберите категорию"});
       return;
     } else if(formData.questions.find(question => !question.answers.find(answer => answer.isTrue))){
       dispatch({type: CREATE_QUIZ_FAILING, payload: "Выберите верные варианты ответов"});

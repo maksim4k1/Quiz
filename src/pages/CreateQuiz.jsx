@@ -99,7 +99,7 @@ function CreateQuiz ({categories, categoriesInfo, profile, createQuizInfo, loadC
 
           <Button type="button" onClick={() => setQuestionsCount(data => data + 1)}>Добавить вопрос</Button>
           {
-            createQuizInfo.error
+            createQuizInfo.error && createQuizInfo.failing
             ? <Error>{createQuizInfo.error}</Error>
             : null
           }

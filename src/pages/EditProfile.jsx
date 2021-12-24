@@ -13,6 +13,7 @@ import { editProfileAction } from "../redux/actions/auth/editProfileAction";
 import CameraIcon from "../assets/icons/CameraIcon";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Content from "../components/Content";
+import Error from "../components/UI/Error";
 
 const ImageInputContainer = styled.div`
   width: 250px;
@@ -59,11 +60,6 @@ const Image = styled.img`
 const Buttons = styled.div`
   display: flex;
   ${gap("30px")}
-`;
-const Error = styled.div`
-  color: var(--color-red);
-  font-size: 12px;
-  font-weight: 600;
 `;
 
 function EditProfile ({profile, info, editProfile}) {
@@ -131,17 +127,17 @@ function EditProfile ({profile, info, editProfile}) {
             onChange={onChangeHandler}
           />
 
+          {
+            info.error && info.failing
+            ? <Error>{info.error}</Error>
+            : null
+          }
           <Buttons>
             <Button type="submit" disabled={info.loading}>Сохранить</Button>
             <NavLink to="/profile">
               <LightButton type="reset" disabled={info.loading}>Не сохранять</LightButton>
             </NavLink>
           </Buttons>
-          {
-            info.error && info.failing
-            ? <Error>{info.error}</Error>
-            : null
-          }
         </Form>
       </div>
     </Content>

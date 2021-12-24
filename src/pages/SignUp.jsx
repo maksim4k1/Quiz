@@ -9,15 +9,11 @@ import Form from "../components/UI/Form";
 import Input from "../components/UI/Input";
 import { signUpAction } from "../redux/actions/auth/signUpAction";
 import Content from "../components/Content";
+import Error from "../components/UI/Error";
 
 const RedirectLink = styled.div`
   color: var(--color-gray);
   font-size: 14px;
-  font-weight: 600;
-`;
-const Error = styled.div`
-  color: var(--color-red);
-  font-size: 12px;
   font-weight: 600;
 `;
 
@@ -82,12 +78,12 @@ function SignUp ({info, signUp}) {
             onChange={onChangeHandler}
           />
 
-          <Button type="submit" disabled={info.loading}>{info.loading ? "Подождите..." : "Регистрация"}</Button>
           {
             info.error && info.failing
             ? <Error>{info.error}</Error>
             : null
           }
+          <Button type="submit" disabled={info.loading}>{info.loading ? "Подождите..." : "Регистрация"}</Button>
           <RedirectLink>Вы уже зарегистрированы? <AppLink to="/signin">Авторизация</AppLink></RedirectLink>
         </Form>
       </div>
