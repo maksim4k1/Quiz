@@ -1,6 +1,8 @@
+import { createNewQuiz } from "../../../api/myQuizzesRequests";
 import { CREATE_QUIZ_FAILING, CREATE_QUIZ_LOADING, CREATE_QUIZ_SUCCESS } from "../../types"
+import { logInAction } from "../auth/logInAction";
 
-export function createQuizAction(formData){
+export function createQuizAction(formData, redirect){
   return async (dispatch) => {
     dispatch({type: CREATE_QUIZ_LOADING});
 
@@ -31,6 +33,17 @@ export function createQuizAction(formData){
       }
     }
 
-    dispatch({type: CREATE_QUIZ_SUCCESS, payload: ""});
+    console.log(formData)
+    const response = await createNewQuiz(formData);
+    const data = response.json ? await response.json() : "Error 500: Ошибка на сервере";
+    
+    if(response.ok){
+      dispatch({type: CREATE_QUIZ_SUCCESS});
+      dispatch(logInAction());
+      console.log(data)
+      redirect();
+    } else{
+      dispatch({type: CREATE_QUIZ_FAILING, payload: data});
+    }
   }
 }

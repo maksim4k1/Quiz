@@ -1,8 +1,8 @@
 import URL from "./requests"
 
-export function getMyQuizzes(data){
+export async function getMyQuizzes(data){
   try{
-    const response = fetch(`${URL}/myquizzes`, {
+    const response = await fetch(`${URL}/myquizzes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -18,9 +18,9 @@ export function getMyQuizzes(data){
   }
 }
 
-export function getMyQuiz(data){
+export async function getMyQuiz(data){
   try{
-    const response = fetch(`${URL}/myquiz/`, {
+    const response = await fetch(`${URL}/myquiz/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -28,6 +28,24 @@ export function getMyQuiz(data){
       body: JSON.stringify(data)
     });
 
+    return response;
+  } catch{
+    return {
+      ok: false
+    }
+  }
+}
+
+export async function createNewQuiz(data){
+  try{
+    const response = await fetch(`${URL}/myquiz/create`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  
     return response;
   } catch{
     return {

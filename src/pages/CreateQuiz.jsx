@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Content from "../components/Content";
@@ -34,6 +34,7 @@ function CreateQuiz ({categories, categoriesInfo, profile, createQuizInfo, loadC
   const [formData, setFormData] = useState({author: profile ? profile.username : "", questions: []});
   const [questionsCount, setQuestionsCount] = useState(0);
   const [questions, setQuestions] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const newQuestions = [];
@@ -60,7 +61,7 @@ function CreateQuiz ({categories, categoriesInfo, profile, createQuizInfo, loadC
   }
   function onSubmitHandler(event){
     event.preventDefault();
-    createQuiz(formData);
+    createQuiz(formData, () => navigate("/myquizzes"));
   }
 
   return(
