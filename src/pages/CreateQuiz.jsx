@@ -2,17 +2,20 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Content from "../components/Content";
 import Button from "../components/UI/Buttons/Button";
 import LightButton from "../components/UI/Buttons/LightButton";
 import CreateQuestionCard from "../components/UI/Cards/CreateQuestionCard";
+import Error from "../components/UI/Error";
 import Form from "../components/UI/Form";
 import Input from "../components/UI/Input";
 import Switch from "../components/UI/Select";
 import TextArea from "../components/UI/TextArea";
 import { loadCategoriesAction } from "../redux/actions/categories/loadCategoriesAction";
+import { createQuizAction } from "../redux/actions/myQuizzes/createQuizAction";
 import { gap } from "../styles/mixins";
 
 const SubTitle = styled.h5`
@@ -27,7 +30,7 @@ const Buttons = styled.div`
   ${gap("25px")}
 `;
 
-function CreateQuiz ({categories, categoriesInfo, profile, loadCategories}) {
+function CreateQuiz ({categories, categoriesInfo, profile, createQuizInfo, loadCategories, createQuiz}) {
   const [formData, setFormData] = useState({author: profile ? profile.username : "", questions: []});
   const [questionsCount, setQuestionsCount] = useState(0);
   const [questions, setQuestions] = useState([]);
@@ -44,7 +47,10 @@ function CreateQuiz ({categories, categoriesInfo, profile, loadCategories}) {
     if(!categories){
       loadCategories();
     }
-  }, [categories, loadCategories]);
+    if(createQuizInfo.error){
+      createQuizInfo.error = "";
+    }
+  }, [categories, loadCategories, createQuizInfo, formData]);
 
   function onChangeHandler(event){
     setFormData((data) => ({
@@ -54,6 +60,7 @@ function CreateQuiz ({categories, categoriesInfo, profile, loadCategories}) {
   }
   function onSubmitHandler(event){
     event.preventDefault();
+    createQuiz(formData);
   }
 
   return(
@@ -91,9 +98,14 @@ function CreateQuiz ({categories, categoriesInfo, profile, loadCategories}) {
           {questions}
 
           <Button type="button" onClick={() => setQuestionsCount(data => data + 1)}>Добавить вопрос</Button>
+          {
+            createQuizInfo.error
+            ? <Error>{createQuizInfo.error}</Error>
+            : null
+          }
           <Buttons>
-            <Button type="submit">Сохранить</Button>
-            <LightButton>Отменить</LightButton>
+            <Button type="submit" disabled={createQuizInfo.loading}>Сохранить</Button>
+            <NavLink type="button" to="/myquizzes"><LightButton>Отменить</LightButton></NavLink>
           </Buttons>
         </Form>
       </div>
@@ -105,9 +117,11 @@ const mapStateToProps = (state) => ({
   categories: state.categories.categories,
   categoriesInfo: state.categories.categoriesState,
   profile: state.auth.profile,
+  createQuizInfo: state.myQuizzes.createQuizState,
 });
 const mapDispatchToProps = {
-  loadCategories: loadCategoriesAction
+  loadCategories: loadCategoriesAction,
+  createQuiz: createQuizAction,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateQuiz);
